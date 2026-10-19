@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <!-- ─── Meta ─────────────────────────────────────────────── -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Redine Kyle V. Elejorde — Computer Engineering Student passionate about embedded systems, mobile & desktop software development." />
-  <title>Hello, Welcome to my Portfolio</title>
+  <meta name="description" content="Redine Kyle V. Elejorde — Computer Engineering Student passionate about embedded systems, mobile & desktop software development, and database architecture." />
+  <title>Redine Kyle V. Elejorde | Portfolio</title>
 
-  <!-- Google Fonts: Fira Code (matches letsch.dev's monospace-first typography) -->
+  <!-- Google Fonts: Fira Code (monospace throughout) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -18,12 +18,12 @@
 <body>
 
   <!-- ════════════════════════════════════════════════════════
-       PIXELATED CRT OVERLAY  (letsch.dev signature effect)
+       PIXELATED CRT OVERLAY
        ════════════════════════════════════════════════════════ -->
   <div class="pixelated-overlay" aria-hidden="true"></div>
 
   <!-- ════════════════════════════════════════════════════════
-       NAVIGATION
+       NAVIGATION (Sticky Header + Light/Dark Mode Toggle)
        ════════════════════════════════════════════════════════ -->
   <div class="nav-wrapper">
     <div class="nav-inner-wrapper">
@@ -36,10 +36,34 @@
           <a href="#about"      class="nav-link">About</a>
           <a href="#projects"   class="nav-link">Projects</a>
           <a href="#tech-stack" class="nav-link">Tech Stack</a>
+          <a href="#contact"    class="nav-link">Contact</a>
         </div>
 
-        <!-- Contact CTA button (matches letsch.dev pattern exactly) -->
-        <button class="btn-outline" id="nav-contact-button">Contact</button>
+        <!-- Controls: Theme Toggle & Contact Button -->
+        <div class="nav-actions">
+          <!-- Light / Dark Mode Toggle Button -->
+          <button class="btn-theme-toggle" id="theme-toggle" aria-label="Toggle light and dark mode" title="Toggle theme">
+            <!-- Sun Icon (visible in dark mode) -->
+            <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <!-- Moon Icon (visible in light mode) -->
+            <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+
+          <!-- Contact CTA button -->
+          <button class="btn-outline" id="nav-contact-button">Contact</button>
+        </div>
       </nav>
     </div>
   </div>
@@ -47,34 +71,41 @@
   <main>
 
     <!-- ══════════════════════════════════════════════════════
-         HERO / ABOUT
+         HERO / ABOUT (Cover Photo Banner + Centered Profile)
          ══════════════════════════════════════════════════════ -->
     <div class="section-wrapper bg-gradient-bottom" id="about">
-      <div class="section-container hero-inner">
+      <div class="section-container hero-inner hero-inner-centered">
 
-        <!-- Profile Photo (LEFT side, matching letsch.dev portrait position) -->
-        <div class="hero-portrait-wrapper">
-          <!--
-            Drop your headshot as "profile.jpg" in the same folder.
-            The styled initials fallback shows automatically if the file is missing.
-          -->
+        <!-- Cover Photo Banner (background.jpg) -->
+        <div class="hero-cover-banner">
           <img
-            src="images/profile.png"
+            src="images/background.jpg"
+            alt="Cover background"
+            class="cover-banner-img"
+            loading="eager"
+          />
+          <div class="cover-banner-overlay"></div>
+        </div>
+
+        <!-- Centered Profile Photo (overlaps bottom of cover banner) -->
+        <div class="hero-portrait-wrapper">
+          <img
+            src="images/profile.jpg"
             alt="Portrait of Redine Kyle V. Elejorde"
             class="hero-portrait"
-            width="340"
-            height="340"
+            width="190"
+            height="190"
             loading="eager"
-            onerror="this.style.display='none';document.getElementById('portrait-fallback').style.display='flex';"
+            onerror="this.src='images/profile.png';this.onerror=function(){this.style.display='none';document.getElementById('portrait-fallback').style.display='flex';};"
           />
           <div id="portrait-fallback" class="portrait-fallback">
             <span>RK</span>
           </div>
         </div>
 
-        <!-- Text content (RIGHT side) -->
-        <section class="hero-text">
-          <!-- Decorative dots SVG (letsch.dev has this decorative element) -->
+        <!-- Centered Text Content -->
+        <section class="hero-text hero-text-centered">
+          <!-- Decorative dots SVG -->
           <div class="hero-dots" aria-hidden="true">
             <svg width="80" height="20" viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="5"  cy="10" r="4" fill="var(--green)" opacity="0.6"/>
@@ -87,7 +118,7 @@
           <h1>
             <div class="h1-main">
               <div class="hey-there">Hey there, I'm</div>
-              <div class="name">Redine Kyle<br/>V. Elejorde</div>
+              <div class="name">Redine Kyle V. Elejorde</div>
             </div>
             <div class="h1-sub">Computer Engineering Student.</div>
           </h1>
@@ -100,36 +131,44 @@
             I build things that bridge hardware and software to solve real-world problems.
           </p>
 
-          <!-- Action buttons — matching letsch.dev btn-outline style -->
-          <div class="hero-buttons">
+          <!-- Centered Action Buttons -->
+          <div class="hero-buttons hero-buttons-centered">
+            <!-- GitHub -->
             <a href="https://github.com/Redine1" target="_blank" rel="noopener noreferrer" class="btn-outline btn-github">
-              <!-- GitHub icon -->
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
               </svg>
               <span>GitHub</span>
             </a>
 
+            <!-- LinkedIn (Fixed Public Profile Link) -->
+            <a href="https://www.linkedin.com/in/redine-kyle-elejorde-b44182445/" target="_blank" rel="noopener noreferrer" class="btn-outline btn-linkedin">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+              <span>LinkedIn</span>
+            </a>
+
+            <!-- Facebook -->
             <a href="https://www.facebook.com/redinekyle.elejorde.9" target="_blank" rel="noopener noreferrer" class="btn-outline btn-facebook">
-              <!-- Facebook icon -->
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
               </svg>
               <span>Facebook</span>
             </a>
 
+            <!-- Email (Scrolls to Contact) -->
             <button class="btn-outline btn-email" id="email-button">
-              <!-- Email icon -->
-              <svg width="20" height="18" viewBox="0 0 22 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <svg width="18" height="16" viewBox="0 0 22 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <rect x="1" y="1" width="20" height="16" rx="2"/>
                 <polyline points="1,1 11,10 21,1"/>
               </svg>
               <span>Email</span>
             </button>
 
+            <!-- Download CV -->
             <a href="resume.pdf" download="Redine_Kyle_Elejorde_CV.pdf" class="btn-outline btn-cv">
-              <!-- Download icon -->
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                 <polyline points="7 10 12 15 17 10"/>
                 <line x1="12" y1="15" x2="12" y2="3"/>
@@ -174,7 +213,7 @@
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
               </svg>
-              View on GitHub
+              <span>View on GitHub</span>
             </a>
           </article>
 
@@ -200,7 +239,7 @@
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
               </svg>
-              View on GitHub
+              <span>View on GitHub</span>
             </a>
           </article>
 
@@ -225,7 +264,7 @@
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
               </svg>
-              View on GitHub
+              <span>View on GitHub</span>
             </a>
           </article>
 
@@ -250,7 +289,7 @@
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
               </svg>
-              View on GitHub
+              <span>View on GitHub</span>
             </a>
           </article>
 
@@ -259,48 +298,50 @@
     </section>
 
     <!-- ══════════════════════════════════════════════════════
-         TECH STACK & TOOLS
+         TECH STACK & TOOLS (IDE Code Editor Window)
          ══════════════════════════════════════════════════════ -->
     <section class="section-wrapper" id="tech-stack">
       <div class="section-container">
         <h2>Tech Stack &amp; Tools</h2>
 
-        <!-- Core Technologies -->
-        <div class="tech-category">
-          <div class="tech-category-label">Core Technologies &amp; Databases</div>
-          <div class="tech-chips">
-            <div class="chip chip--slate">HTML</div>
-            <div class="chip chip--slate">CSS</div>
-            <div class="chip chip--slate">JavaScript</div>
-            <div class="chip chip--slate">Java</div>
-            <div class="chip chip--slate">Python</div>
-            <div class="chip chip--slate">C</div>
-            <div class="chip chip--slate">C++</div>
-            <div class="chip chip--slate">C#</div>
-            <div class="chip chip--slate">Kotlin</div>
-            <div class="chip chip--slate">Android Studio</div>
-            <div class="chip chip--slate">MySQL</div>
-            <div class="chip chip--slate">MongoDB</div>
-            <div class="chip chip--slate">SQLite</div>
-            <div class="chip chip--slate">FastAPI</div>
-            <div class="chip chip--slate">JavaSwing</div>
-            <div class="chip chip--slate">JavaFX</div>
+        <!-- IDE Code Editor Window (matches user design reference) -->
+        <div class="code-editor-card">
+          <!-- Window Title Bar -->
+          <div class="code-editor-header">
+            <div class="editor-window-dots" aria-hidden="true">
+              <span class="window-dot dot-red"></span>
+              <span class="window-dot dot-yellow"></span>
+              <span class="window-dot dot-green"></span>
+            </div>
+            <div class="editor-file-tab">
+              <svg class="file-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              <span>tech-stack.json</span>
+            </div>
+            <button class="btn-copy-code" id="btn-copy-tech" aria-label="Copy code to clipboard" title="Copy JSON">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span class="copy-text">Copy</span>
+            </button>
           </div>
-        </div>
 
-        <!-- AI Tools -->
-        <div class="tech-category">
-          <div class="tech-category-label">AI Tools I Use</div>
-          <div class="tech-chips">
-            <div class="chip chip--ai chip--ai-gpt">
-              <span class="ai-dot ai-dot--gpt"></span>ChatGPT
-            </div>
-            <div class="chip chip--ai chip--ai-gemini">
-              <span class="ai-dot ai-dot--gemini"></span>Gemini
-            </div>
-            <div class="chip chip--ai chip--ai-claude">
-              <span class="ai-dot ai-dot--claude"></span>Claude
-            </div>
+          <!-- Editor Body with Line Numbers & Syntax Highlighting -->
+          <div class="code-editor-body">
+            <pre class="code-block" tabindex="0"><code><span class="code-line"><span class="line-num">1</span>  <span class="tok-comment">// core technologies &amp; toolbelt</span></span>
+<span class="code-line"><span class="line-num">2</span>  <span class="tok-bracket">{</span></span>
+<span class="code-line"><span class="line-num">3</span>    <span class="tok-key">"languages"</span><span class="tok-punct">:</span> <span class="tok-bracket">[</span> <span class="tok-str">"Java"</span><span class="tok-punct">,</span> <span class="tok-str">"Python"</span><span class="tok-punct">,</span> <span class="tok-str">"C"</span><span class="tok-punct">,</span> <span class="tok-str">"C++"</span><span class="tok-punct">,</span> <span class="tok-str">"C#"</span><span class="tok-punct">,</span> <span class="tok-str">"Kotlin"</span><span class="tok-punct">,</span> <span class="tok-str">"JavaScript"</span> <span class="tok-bracket">]</span><span class="tok-punct">,</span></span>
+<span class="code-line"><span class="line-num">4</span>    <span class="tok-key">"databases"</span><span class="tok-punct">:</span> <span class="tok-bracket">[</span> <span class="tok-str">"MySQL"</span><span class="tok-punct">,</span> <span class="tok-str">"MongoDB"</span><span class="tok-punct">,</span> <span class="tok-str">"SQLite"</span> <span class="tok-bracket">]</span><span class="tok-punct">,</span></span>
+<span class="code-line"><span class="line-num">5</span>    <span class="tok-key">"mobile"</span><span class="tok-punct">:</span> <span class="tok-bracket">[</span> <span class="tok-str">"Kotlin"</span><span class="tok-punct">,</span> <span class="tok-str">"Android Studio"</span> <span class="tok-bracket">]</span><span class="tok-punct">,</span></span>
+<span class="code-line"><span class="line-num">6</span>    <span class="tok-key">"web_backend"</span><span class="tok-punct">:</span> <span class="tok-bracket">[</span> <span class="tok-str">"HTML5"</span><span class="tok-punct">,</span> <span class="tok-str">"CSS3"</span><span class="tok-punct">,</span> <span class="tok-str">"JavaScript"</span><span class="tok-punct">,</span> <span class="tok-str">"FastAPI"</span> <span class="tok-bracket">]</span><span class="tok-punct">,</span></span>
+<span class="code-line"><span class="line-num">7</span>    <span class="tok-key">"desktop_gui"</span><span class="tok-punct">:</span> <span class="tok-bracket">[</span> <span class="tok-str">"JavaSwing"</span><span class="tok-punct">,</span> <span class="tok-str">"JavaFX"</span> <span class="tok-bracket">]</span><span class="tok-punct">,</span></span>
+<span class="code-line"><span class="line-num">8</span>    <span class="tok-key">"embedded_iot"</span><span class="tok-punct">:</span> <span class="tok-bracket">[</span> <span class="tok-str">"ESP32"</span><span class="tok-punct">,</span> <span class="tok-str">"Arduino"</span><span class="tok-punct">,</span> <span class="tok-str">"Circuit Design"</span><span class="tok-punct">,</span> <span class="tok-str">"IoT"</span> <span class="tok-bracket">]</span><span class="tok-punct">,</span></span>
+<span class="code-line"><span class="line-num">9</span>    <span class="tok-key">"ai_tools"</span><span class="tok-punct">:</span> <span class="tok-bracket">[</span> <span class="tok-str">"ChatGPT"</span><span class="tok-punct">,</span> <span class="tok-str">"Claude"</span><span class="tok-punct">,</span> <span class="tok-str">"Gemini"</span> <span class="tok-bracket">]</span></span>
+<span class="code-line"><span class="line-num">10</span> <span class="tok-bracket">}</span></span>
+<span class="code-line"><span class="line-num">11</span> </span></code></pre>
           </div>
         </div>
 
@@ -313,7 +354,7 @@
     <section class="section-wrapper" id="contact">
       <div class="section-container">
 
-        <!-- Section header (exact letsch.dev structure) -->
+        <!-- Section header -->
         <div class="contact-header">
           <div class="get-in-touch-label">GET IN TOUCH</div>
           <h2>Let's work together</h2>
@@ -370,10 +411,23 @@
 
             <!-- Contact info card -->
             <div class="ui-card contact-info-card">
+              <!-- LinkedIn Direct Contact Row -->
+              <div class="contact-row">
+                <div class="contact-icon-wrap">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                  </svg>
+                </div>
+                <div class="contact-row-text">
+                  <div class="contact-row-label">LinkedIn</div>
+                  <a href="https://www.linkedin.com/in/redine-kyle-elejorde-b44182445/" target="_blank" rel="noopener noreferrer" class="contact-value-link">Redine Kyle Elejorde</a>
+                </div>
+              </div>
+
               <!-- Email -->
               <div class="contact-row">
                 <div class="contact-icon-wrap">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/>
                     <rect x="2" y="4" width="20" height="16" rx="2"/>
                   </svg>
@@ -387,7 +441,7 @@
               <!-- Location -->
               <div class="contact-row">
                 <div class="contact-icon-wrap">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/>
                     <circle cx="12" cy="10" r="3"/>
                   </svg>
@@ -403,17 +457,26 @@
             <div class="ui-card social-links-card">
               <div class="contact-row-label" style="margin-bottom: 14px;">Find me online</div>
               <div class="social-links">
+                <!-- LinkedIn (Fixed Public Profile Link) -->
+                <a href="https://www.linkedin.com/in/redine-kyle-elejorde-b44182445/" target="_blank" rel="noopener noreferrer" class="btn-outline social-btn btn-linkedin">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                  </svg>
+                  <span>LinkedIn</span>
+                </a>
+
                 <a href="https://github.com/Redine1" target="_blank" rel="noopener noreferrer" class="btn-outline social-btn">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
                   </svg>
-                  GitHub
+                  <span>GitHub</span>
                 </a>
+
                 <a href="https://www.facebook.com/redinekyle.elejorde.9" target="_blank" rel="noopener noreferrer" class="btn-outline social-btn">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                   </svg>
-                  Facebook
+                  <span>Facebook</span>
                 </a>
               </div>
             </div>
@@ -438,6 +501,7 @@
       <a href="#projects">Projects</a>
       <a href="#tech-stack">Tech Stack</a>
       <a href="#contact">Contact</a>
+      <a href="https://www.linkedin.com/in/redine-kyle-elejorde-b44182445/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     </div>
   </footer>
 

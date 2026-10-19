@@ -1,54 +1,123 @@
 /* ================================================================
-   REDINE KYLE V. ELEJORDE — PORTFOLIO
-   Faithfully replicating the letsch.dev design system:
-   · Background: rgb(17, 24, 39)  — near-black
-   · Cards:      #1d293d          — dark blue-slate
-   · Accent:     #00d089          — vivid green
-   · Font:       Fira Code        — monospace throughout
-   · Buttons:    bordered rect, fill on hover
-   · CRT pixelated overlay
+   REDINE KYLE V. ELEJORDE — PORTFOLIO  |  style.css
+   Minimalist slate aesthetic inspired by letsch.dev:
+   · Dark Mode (default): rgb(17, 24, 39) slate & #1d293d cards
+   · Light Mode: Crisp white & light slate-50 palette
+   · Typography: Fira Code monospace throughout
+   · Buttons: Bordered rectangular outlines, fill on hover
+   · Hero: Cover photo banner (background.jpg) with centered profile
+   · Tech Stack: IDE code editor window with line numbers & syntax highlighting
    ================================================================ */
 
 /* ----------------------------------------------------------------
-   1. CSS CUSTOM PROPERTIES  (lifted directly from letsch.dev source)
+   1. CSS CUSTOM PROPERTIES (Themes: Dark & Light Modes)
    ---------------------------------------------------------------- */
-:root {
+:root,
+[data-theme="dark"] {
   --container-width:    1100px;
   --container-padding:  40px;
 
   /* Accent palette */
-  --green:    #00d089;
-  --cyan:     #14aadb;
-  --violet:   #9c72fd;
-  --orange:   #ff9999;
+  --green:              #00d089;
+  --green-glow:         rgba(0, 208, 137, 0.25);
+  --cyan:               #14aadb;
+  --violet:             #9c72fd;
+  --orange:             #ff9999;
 
   /* Backgrounds */
-  --bg-blue:      #1d2942;
-  --dark-blue:    #0f172b;
-  --body-bg:      rgb(17, 24, 39);
-  --card-bg:      #1d293d;
+  --body-bg:            rgb(17, 24, 39);
+  --body-bg-gradient-1: #0f172b;
+  --body-bg-gradient-2: #1d2942;
+  --card-bg:            #1d293d;
+  --card-border:        #475569;
+  --card-hover-border:  var(--green);
 
-  /* Text */
-  --text-color:       rgb(209, 213, 219);
-  --text-muted-color: #969dab;
-  --grey:             #475569;
+  /* Text colors */
+  --text-color:         rgb(209, 213, 219);
+  --text-heading:       #ffffff;
+  --text-muted-color:   #969dab;
+  --grey:               #475569;
 
   /* Surface / borders */
-  --surface-divider: rgba(55, 65, 81, 0.3);
+  --surface-divider:    rgba(55, 65, 81, 0.4);
+  --nav-bg:             rgba(17, 24, 39, 0.92);
+  --nav-border:         rgba(71, 85, 105, 0.45);
+  --input-bg:           #0f172b;
+  --input-border:       #475569;
+  --input-text:         #f8fafc;
+  --footer-bg:          #0c1322;
+
+  /* IDE Code Editor Colors (matching screenshot) */
+  --editor-bg:          #0b0f17;
+  --editor-header-bg:   #131a26;
+  --editor-border:      #263345;
+  --editor-line-num:    #425263;
+  --editor-comment:     #4e6578;
+  --editor-key:         #60a5fa;
+  --editor-punct:       #94a3b8;
+  --editor-str:         #00d089;
+  --editor-bracket:     #e2e8f0;
 
   /* Component tokens */
-  --radius-big:      16px;
-  --radius-small:    10px;
-  --card-padding:    24px;
-  --control-padding: 8px 16px;
-  --nav-height:      64px;
+  --radius-big:         16px;
+  --radius-small:       10px;
+  --card-padding:       24px;
+  --control-padding:    8px 16px;
+  --nav-height:         64px;
 
-  /* AI tool colors */
-  --gpt-green:    #10a37f;
-  --gemini-purple:#8b5cf6;
-  --claude-amber: #d97706;
+  /* Cover Banner Overlay */
+  --cover-overlay:      linear-gradient(180deg, rgba(15, 23, 42, 0.25) 0%, rgba(15, 23, 42, 0.5) 45%, rgba(17, 24, 39, 0.95) 100%);
 
-  scroll-padding-top: 100px;
+  scroll-padding-top:   100px;
+  color-scheme: dark;
+}
+
+/* ─── White Version / Light Mode ─── */
+[data-theme="light"] {
+  --green:              #059669; /* Accessible high-contrast emerald green on white */
+  --green-glow:         rgba(5, 150, 105, 0.15);
+  --cyan:               #0284c7;
+  --violet:             #7c3aed;
+  --orange:             #e11d48;
+
+  /* Clean White & Slate Backgrounds */
+  --body-bg:            #f8fafc;
+  --body-bg-gradient-1: #edf2f7;
+  --body-bg-gradient-2: #e2e8f0;
+  --card-bg:            #ffffff;
+  --card-border:        #cbd5e1;
+  --card-hover-border:  var(--green);
+
+  /* Crisp Dark Slate Typography */
+  --text-color:         #334155;
+  --text-heading:       #0f172a;
+  --text-muted-color:   #64748b;
+  --grey:               #94a3b8;
+
+  /* Surface / borders */
+  --surface-divider:    rgba(203, 213, 225, 0.8);
+  --nav-bg:             rgba(255, 255, 255, 0.94);
+  --nav-border:         #e2e8f0;
+  --input-bg:           #ffffff;
+  --input-border:       #cbd5e1;
+  --input-text:         #0f172a;
+  --footer-bg:          #f1f5f9;
+
+  /* IDE Code Editor Colors (Light Mode) */
+  --editor-bg:          #0f172a; /* Keep IDE dark/contrasting for authentic code feel */
+  --editor-header-bg:   #1e293b;
+  --editor-border:      #cbd5e1;
+  --editor-line-num:    #64748b;
+  --editor-comment:     #94a3b8;
+  --editor-key:         #93c5fd;
+  --editor-punct:       #cbd5e1;
+  --editor-str:         #34d399;
+  --editor-bracket:     #f8fafc;
+
+  /* Cover Banner Overlay */
+  --cover-overlay:      linear-gradient(180deg, rgba(248, 250, 252, 0.15) 0%, rgba(248, 250, 252, 0.4) 45%, rgba(248, 250, 252, 0.95) 100%);
+
+  color-scheme: light;
 }
 
 /* ----------------------------------------------------------------
@@ -72,8 +141,7 @@
 
 *, *::before, *::after {
   box-sizing: border-box;
-  /* Green-tinted scrollbar to match letsch.dev */
-  scrollbar-color: var(--green) var(--dark-blue);
+  scrollbar-color: var(--green) var(--body-bg);
   scrollbar-width: thin;
 }
 
@@ -81,14 +149,14 @@
 :where(button)  { cursor: pointer; }
 
 /* ----------------------------------------------------------------
-   3. BASE  (body / html)
+   3. BASE (body / html)
    ---------------------------------------------------------------- */
 html, body {
   font-family:    'Fira Code', 'Cascadia Code', 'Consolas', monospace;
   letter-spacing: -0.025rem;
   word-spacing:   -0.125rem;
   font-size:      16px;
-  line-height:    1.5;
+  line-height:    1.6;
   background-color: var(--body-bg);
   color:          var(--text-color);
   scroll-behavior: smooth;
@@ -96,265 +164,68 @@ html, body {
   text-align:     left;
   word-wrap:      break-word;
   overflow-wrap:  break-word;
+  transition:     background-color 250ms ease, color 250ms ease;
 }
 
 /* ----------------------------------------------------------------
-   4. SELECTION
+   4. PIXELATED CRT OVERLAY
    ---------------------------------------------------------------- */
+.pixelated-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.12),
+      rgba(0, 0, 0, 0.12) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+  opacity: 0.55;
+}
+
+[data-theme="light"] .pixelated-overlay {
+  opacity: 0.2;
+}
+
+/* Selection */
 ::selection {
   background-color: var(--green);
-  color: var(--dark-blue);
+  color: var(--body-bg);
 }
 
 /* ----------------------------------------------------------------
-   5. FADE-IN ANIMATION (letsch.dev uses this on sections)
-   ---------------------------------------------------------------- */
-@keyframes fadeIn {
-  0%  { opacity: 0; transform: translateY(20px); }
-  15% { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes heart-beat {
-  0%   { transform: scale(1); }
-  20%  { transform: scale(1.25); }
-  100% { transform: scale(1); }
-}
-
-/* ----------------------------------------------------------------
-   6. LAYOUT UTILITIES
-   ---------------------------------------------------------------- */
-.section-wrapper {
-  width: 100%;
-  display: flex;
-  padding: 90px var(--container-padding) 120px;
-  justify-content: center;
-  align-items: flex-start;
-  /* Scroll-reveal animation */
-  animation: fadeIn linear;
-  animation-timeline: view();
-}
-
-.section-container {
-  width: var(--container-width);
-  max-width: 100%;
-  margin: 0 auto;
-}
-
-/* Gradient backgrounds (matching letsch.dev alternating sections) */
-.bg-gradient-bottom {
-  background: linear-gradient(to bottom, var(--dark-blue), var(--bg-blue));
-}
-
-.bg-gradient-top {
-  background: linear-gradient(to top, var(--dark-blue), var(--bg-blue));
-}
-
-/* ----------------------------------------------------------------
-   7. TYPOGRAPHY
-   ---------------------------------------------------------------- */
-h2 {
-  font-size: clamp(1.8rem, 4vw, 2.4rem);
-  font-weight: 700;
-  color: var(--text-color);
-  letter-spacing: -0.03em;
-  margin-bottom: 40px;
-}
-
-h3 {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 12px;
-}
-
-p {
-  color: var(--text-muted-color);
-  line-height: 1.75;
-}
-
-strong {
-  color: var(--text-color);
-  font-weight: 700;
-}
-
-/* ----------------------------------------------------------------
-   8. UI CARD  (letsch.dev .ui-card)
-   ---------------------------------------------------------------- */
-.ui-card {
-  background: var(--card-bg);
-  border: 2px solid var(--grey);
-  border-radius: var(--radius-big);
-  padding: var(--card-padding);
-  transition: border-color 250ms ease;
-}
-
-.ui-card:hover {
-  border-color: var(--green);
-}
-
-/* ----------------------------------------------------------------
-   9. CHIP / BADGE  (letsch.dev .chip)
-   ---------------------------------------------------------------- */
-.chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.78rem;
-  font-weight: 700;
-  padding: 4px 12px;
-  border-radius: 6px;
-  white-space: nowrap;
-}
-
-/* Slate variant — tech tags inside cards */
-.chip--slate {
-  background-color: rgba(71, 85, 105, 0.25);
-  border: 1px solid var(--grey);
-  color: var(--text-muted-color);
-}
-
-/* Green variant — category label (like "Current Employment") */
-.chip--green {
-  background-color: rgba(0, 208, 137, 0.12);
-  border: 1px solid rgba(0, 208, 137, 0.4);
-  color: var(--green);
-}
-
-/* AI tool variants */
-.chip--ai {
-  font-size: 0.85rem;
-  padding: 6px 16px;
-  background-color: rgba(71, 85, 105, 0.2);
-  border: 1px solid var(--grey);
-  color: var(--text-color);
-}
-
-.chip--ai-gpt:hover    { border-color: var(--gpt-green);    color: var(--gpt-green); }
-.chip--ai-gemini:hover { border-color: var(--gemini-purple);color: var(--gemini-purple); }
-.chip--ai-claude:hover { border-color: var(--claude-amber); color: var(--claude-amber); }
-
-/* AI colored dots */
-.ai-dot {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.ai-dot--gpt    { background: var(--gpt-green);    box-shadow: 0 0 6px var(--gpt-green); }
-.ai-dot--gemini { background: var(--gemini-purple); box-shadow: 0 0 6px var(--gemini-purple); }
-.ai-dot--claude { background: var(--claude-amber);  box-shadow: 0 0 6px var(--claude-amber); }
-
-/* ----------------------------------------------------------------
-   10. BUTTONS  (letsch.dev .btn-outline — bordered rect, fills on hover)
-   ---------------------------------------------------------------- */
-.btn-outline {
-  --highlight-color: var(--green);
-  color: var(--highlight-color);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  border: 2px solid var(--highlight-color);
-  border-radius: var(--radius-small);
-  text-decoration: none;
-  transition: all 300ms ease;
-  font-weight: 700;
-  font-family: inherit;
-  font-size: 0.9rem;
-  padding: 8px 18px;
-  background: transparent;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.btn-outline:hover {
-  background: var(--highlight-color);
-  color: var(--dark-blue);
-}
-
-.btn-outline:focus-visible {
-  outline: 2px solid var(--highlight-color);
-  outline-offset: 3px;
-}
-
-/* Per-button accent overrides */
-.btn-facebook {
-  --highlight-color: #4267B2;
-}
-
-.btn-cv {
-  --highlight-color: var(--cyan);
-}
-
-/* ----------------------------------------------------------------
-   11. INPUT  (letsch.dev .ui-input)
-   ---------------------------------------------------------------- */
-.ui-input {
-  width: 100%;
-  min-height: 40px;
-  border: 2px solid var(--grey);
-  border-radius: var(--radius-small);
-  padding: var(--control-padding);
-  background: var(--dark-blue);
-  color: var(--text-color);
-  font: inherit;
-  font-size: 15px;
-  transition: border-color 200ms ease, box-shadow 200ms ease;
-  display: block;
-}
-
-.ui-input::placeholder {
-  color: #666;
-}
-
-.ui-input:hover {
-  border-color: #64748b;
-}
-
-.ui-input:focus {
-  outline: none;
-  border-color: var(--green);
-  box-shadow: 0 0 0 3px rgba(0, 208, 137, 0.15);
-}
-
-.ui-input.error {
-  border-color: #f87171;
-}
-
-textarea.ui-input {
-  resize: vertical;
-  min-height: 140px;
-  line-height: 1.6;
-}
-
-/* ----------------------------------------------------------------
-   12. NAVBAR
+   5. NAVIGATION
    ---------------------------------------------------------------- */
 .nav-wrapper {
-  height: var(--nav-height);
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background: var(--nav-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--nav-border);
+  transition: background-color 250ms ease, border-color 250ms ease;
 }
 
 .nav-inner-wrapper {
-  width: 100%;
-  background-color: rgba(17, 24, 39, 0.6);
-  border-bottom: 1px solid var(--surface-divider);
-  height: var(--nav-height);
+  max-width: var(--container-width);
+  margin: 0 auto;
   padding: 0 var(--container-padding);
-  position: fixed;
-  z-index: 100;
-  top: 0;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  height: var(--nav-height);
   display: flex;
   align-items: center;
 }
 
 nav {
   width: 100%;
-  max-width: var(--container-width);
-  margin: 0 auto;
   display: flex;
   align-items: center;
   gap: 2rem;
@@ -363,7 +234,7 @@ nav {
 /* Logo */
 .nav-logo {
   font-family: 'Fira Code', monospace;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--green);
   letter-spacing: 0.05em;
@@ -374,10 +245,10 @@ nav {
 }
 
 .nav-logo:hover {
-  background-color: rgba(0, 208, 137, 0.1);
+  background-color: var(--green-glow);
 }
 
-/* Nav link group */
+/* Nav links */
 .nav-links {
   display: flex;
   align-items: center;
@@ -408,7 +279,7 @@ nav {
 
 .nav-link:hover,
 .nav-link.active {
-  color: #fff;
+  color: var(--text-heading);
 }
 
 .nav-link.active::after,
@@ -416,73 +287,231 @@ nav {
   width: 100%;
 }
 
-/* Contact button in nav */
-#nav-contact-button {
-  font-weight: 700;
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ─── Light / Dark Mode Toggle Button ─── */
+.btn-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: 2px solid var(--grey);
+  border-radius: var(--radius-small);
+  background: transparent;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+
+.btn-theme-toggle:hover {
+  border-color: var(--green);
+  color: var(--green);
+  background-color: var(--green-glow);
+}
+
+/* Show sun in dark mode, moon in light mode */
+:root .moon-icon,
+[data-theme="dark"] .moon-icon {
+  display: none;
+}
+:root .sun-icon,
+[data-theme="dark"] .sun-icon {
+  display: block;
+}
+
+[data-theme="light"] .sun-icon {
+  display: none;
+}
+[data-theme="light"] .moon-icon {
+  display: block;
 }
 
 /* ----------------------------------------------------------------
-   13. HERO / ABOUT SECTION
+   6. BUTTONS (.btn-outline)
    ---------------------------------------------------------------- */
-.hero-inner {
-  display: flex;
+.btn-outline {
+  --highlight-color: var(--green);
+  color: var(--highlight-color);
+  display: inline-flex;
   align-items: center;
-  gap: 64px;
+  justify-content: center;
+  gap: 10px;
+  border: 2px solid var(--highlight-color);
+  border-radius: var(--radius-small);
+  text-decoration: none;
+  transition: all 250ms ease;
+  font-weight: 700;
+  font-family: inherit;
+  font-size: 0.9rem;
+  padding: 8px 18px;
+  background: transparent;
+  cursor: pointer;
+  white-space: nowrap;
 }
 
-/* Profile portrait (LEFT) */
-.hero-portrait-wrapper {
-  flex-shrink: 0;
+.btn-outline:hover {
+  background: var(--highlight-color);
+  color: var(--body-bg);
+}
+
+.btn-outline:focus-visible {
+  outline: 2px solid var(--highlight-color);
+  outline-offset: 3px;
+}
+
+/* Brand Button Overrides */
+.btn-facebook {
+  --highlight-color: #4267b2;
+}
+
+.btn-linkedin {
+  --highlight-color: #0077b5;
+}
+
+.btn-cv {
+  --highlight-color: var(--cyan);
+}
+
+/* ----------------------------------------------------------------
+   7. LAYOUT & SECTIONS
+   ---------------------------------------------------------------- */
+.section-wrapper {
+  width: 100%;
+  display: flex;
+  padding: 90px var(--container-padding) 110px;
+  justify-content: center;
+  align-items: flex-start;
+  transition: background-color 250ms ease;
+}
+
+.section-container {
+  width: var(--container-width);
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.bg-gradient-bottom {
+  background: linear-gradient(to bottom, var(--body-bg-gradient-1), var(--body-bg-gradient-2));
+}
+
+.bg-gradient-top {
+  background: linear-gradient(to top, var(--body-bg-gradient-1), var(--body-bg-gradient-2));
+}
+
+h2 {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 700;
+  color: var(--text-heading);
+  letter-spacing: -0.03em;
+  margin-bottom: 36px;
+}
+
+/* ----------------------------------------------------------------
+   8. HERO / ABOUT SECTION (Cover Banner + Centered Profile)
+   ---------------------------------------------------------------- */
+.hero-inner-centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+
+/* ─── Cover Photo Banner (background.jpg) ─── */
+.hero-cover-banner {
+  width: 100%;
+  height: 280px;
+  border-radius: var(--radius-big);
+  overflow: hidden;
   position: relative;
+  border: 2px solid var(--card-border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  margin-bottom: -95px; /* Profile picture overlaps bottom edge of cover */
+}
+
+.cover-banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  display: block;
+}
+
+.cover-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--cover-overlay);
+  pointer-events: none;
+}
+
+/* Centered Profile Photo */
+.hero-portrait-wrapper {
+  position: relative;
+  z-index: 10;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4px;
 }
 
 .hero-portrait {
-  width: 340px;
-  height: 340px;
+  width: 190px;
+  height: 190px;
   object-fit: cover;
   object-position: center top;
-  border-radius: var(--radius-big);
-  border: 2px solid var(--grey);
+  border-radius: 50%;
+  border: 4px solid var(--body-bg);
+  outline: 3px solid var(--green);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 24px var(--green-glow);
   display: block;
-  transition: border-color 300ms ease;
+  background: var(--card-bg);
+  transition: transform 300ms ease, outline-color 300ms ease;
 }
 
 .hero-portrait:hover {
-  border-color: var(--green);
+  transform: scale(1.04);
+  outline-color: var(--text-heading);
 }
 
-/* Initials fallback shown when profile.jpg is missing */
 .portrait-fallback {
-  width: 340px;
-  height: 340px;
-  border-radius: var(--radius-big);
-  border: 2px solid var(--grey);
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  border: 4px solid var(--body-bg);
+  outline: 3px solid var(--green);
   background: linear-gradient(135deg, var(--bg-blue) 0%, var(--dark-blue) 100%);
-  display: none; /* toggled by JS onerror */
+  display: none;
   align-items: center;
   justify-content: center;
 }
 
 .portrait-fallback span {
-  font-family: 'Fira Code', monospace;
-  font-size: 4rem;
+  font-size: 3.5rem;
   font-weight: 700;
   color: var(--green);
   letter-spacing: 0.1em;
 }
 
-/* Text block (RIGHT) */
-.hero-text {
-  flex: 1;
-  min-width: 0;
+/* Centered Text */
+.hero-text-centered {
+  max-width: 780px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .hero-dots {
-  margin-bottom: 24px;
+  margin-bottom: 14px;
 }
 
 .h1-main {
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .hey-there {
@@ -493,37 +522,93 @@ nav {
 }
 
 .name {
-  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
   font-weight: 700;
-  color: #fff;
-  line-height: 1.1;
+  color: var(--text-heading);
+  line-height: 1.15;
   letter-spacing: -0.04em;
 }
 
 .h1-sub {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   color: var(--green);
   font-weight: 700;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   letter-spacing: 0.01em;
 }
 
 .hero-bio {
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: var(--text-muted-color);
   line-height: 1.8;
-  margin-bottom: 32px;
-  max-width: 52ch;
+  margin-bottom: 30px;
+  max-width: 65ch;
 }
 
-.hero-buttons {
+.hero-bio strong {
+  color: var(--text-heading);
+  font-weight: 700;
+}
+
+/* Centered Hero Action Buttons */
+.hero-buttons-centered {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 12px;
 }
 
 /* ----------------------------------------------------------------
-   14. FEATURED PROJECTS SECTION
+   9. CARDS (.ui-card)
+   ---------------------------------------------------------------- */
+.ui-card {
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius-big);
+  padding: var(--card-padding);
+  background: var(--card-bg);
+  transition: border-color 250ms ease, transform 250ms ease, box-shadow 250ms ease, background-color 250ms ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.ui-card:hover {
+  border-color: var(--card-hover-border);
+  box-shadow: 0 8px 24px var(--green-glow);
+}
+
+/* ----------------------------------------------------------------
+   10. CHIPS / BADGES
+   ---------------------------------------------------------------- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.chip--slate {
+  background-color: rgba(71, 85, 105, 0.25);
+  border: 1px solid var(--card-border);
+  color: var(--text-color);
+}
+
+[data-theme="light"] .chip--slate {
+  background-color: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #334155;
+}
+
+.chip--green {
+  background-color: rgba(0, 208, 137, 0.12);
+  border: 1px solid rgba(0, 208, 137, 0.4);
+  color: var(--green);
+}
+
+/* ----------------------------------------------------------------
+   11. FEATURED PROJECTS SECTION
    ---------------------------------------------------------------- */
 .projects-columns {
   display: grid;
@@ -534,110 +619,209 @@ nav {
 .project-card {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+}
+
+.project-text {
+  margin: 16px 0 20px;
+  flex: 1;
 }
 
 .project-text h3 {
-  font-size: 1.1rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  letter-spacing: -0.02em;
   margin-bottom: 10px;
 }
 
 .project-text p {
-  font-size: 0.9rem;
-  line-height: 1.75;
+  color: var(--text-muted-color);
+  font-size: 0.95rem;
+  line-height: 1.7;
 }
 
 .used-technologies {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: auto;
+  margin-bottom: 20px;
 }
 
-/* Divider line above the GitHub button (letsch.dev has this separator) */
 .card-separator {
+  width: 100%;
   height: 1px;
   background: var(--surface-divider);
-  border: none;
-  margin: 4px 0;
+  margin-bottom: 20px;
 }
 
 .project-source-btn {
   align-self: flex-start;
-  font-size: 0.85rem;
-  padding: 7px 16px;
+  padding: 6px 14px;
+  font-size: 0.82rem;
 }
 
 /* ----------------------------------------------------------------
-   15. TECH STACK SECTION
+   12. CODE EDITOR TECH STACK WINDOW (.code-editor-card)
+   (Directly matching user screenshot design reference)
    ---------------------------------------------------------------- */
-.tech-category {
-  margin-bottom: 40px;
+.code-editor-card {
+  border: 2px solid var(--editor-border);
+  border-radius: var(--radius-big);
+  background: var(--editor-bg);
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  transition: border-color 250ms ease, box-shadow 250ms ease;
 }
 
-.tech-category-label {
-  font-size: 0.78rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--text-muted-color);
-  margin-bottom: 16px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--surface-divider);
+.code-editor-card:hover {
+  border-color: var(--card-hover-border);
+  box-shadow: 0 18px 45px var(--green-glow);
 }
 
-.tech-chips {
+.code-editor-header {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: var(--editor-header-bg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* Hover glow on slate chips */
-.chip--slate {
-  transition: border-color 200ms ease, color 200ms ease, background-color 200ms ease;
-  cursor: default;
+.editor-window-dots {
+  display: flex;
+  gap: 8px;
 }
 
-.chip--slate:hover {
-  border-color: var(--green);
+.window-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-red    { background-color: #ff5f56; }
+.dot-yellow { background-color: #ffbd2e; }
+.dot-green  { background-color: #27c93f; }
+
+.editor-file-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.85rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.file-icon {
   color: var(--green);
-  background-color: rgba(0, 208, 137, 0.08);
+}
+
+.btn-copy-code {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  color: #94a3b8;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.78rem;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+
+.btn-copy-code:hover {
+  color: #ffffff;
+  border-color: var(--green);
+  background: rgba(0, 208, 137, 0.12);
+}
+
+.code-editor-body {
+  padding: 24px 20px;
+  overflow-x: auto;
+}
+
+.code-block {
+  margin: 0;
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: #f1f5f9;
+}
+
+.code-line {
+  display: block;
+  white-space: pre;
+}
+
+.line-num {
+  display: inline-block;
+  width: 2.2rem;
+  color: var(--editor-line-num);
+  user-select: none;
+  text-align: right;
+  margin-right: 1.4rem;
+  font-weight: 400;
+}
+
+/* Syntax Highlighting matching screenshot */
+.tok-comment {
+  color: var(--editor-comment);
+  font-style: italic;
+}
+
+.tok-bracket {
+  color: var(--editor-bracket);
+  font-weight: 600;
+}
+
+.tok-key {
+  color: var(--editor-key);
+  font-weight: 600;
+}
+
+.tok-punct {
+  color: var(--editor-punct);
+}
+
+.tok-str {
+  color: var(--editor-str); /* Vibrant green string literals */
+  font-weight: 500;
 }
 
 /* ----------------------------------------------------------------
-   16. CONTACT SECTION
+   13. CONTACT SECTION
    ---------------------------------------------------------------- */
-/* "GET IN TOUCH" header block */
 .contact-header {
   margin-bottom: 40px;
 }
 
 .get-in-touch-label {
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
+  letter-spacing: 0.1em;
   color: var(--green);
-  margin-bottom: 12px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
 }
 
 .contact-separator-line {
+  width: 100%;
   height: 2px;
-  width: 60px;
   background: var(--green);
   margin-top: 16px;
-  border-radius: 2px;
 }
 
-/* Contact grid: form left, info right */
 .contact-grid {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 24px;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
   align-items: start;
 }
 
-/* Form card */
+/* Contact form */
 .contact-form-card {
   display: flex;
   flex-direction: column;
@@ -647,51 +831,77 @@ nav {
 .contact-form-card label {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .label-text {
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   font-weight: 700;
-  color: var(--text-muted-color);
-  letter-spacing: 0.04em;
+  color: var(--text-color);
 }
 
-.field-error {
-  font-size: 0.78rem;
-  color: #f87171;
-  min-height: 1em;
+.ui-input {
+  width: 100%;
+  min-height: 42px;
+  border: 2px solid var(--input-border);
+  border-radius: var(--radius-small);
+  padding: var(--control-padding);
+  background: var(--input-bg);
+  color: var(--input-text);
+  font: inherit;
+  font-size: 15px;
+  transition: border-color 200ms ease, box-shadow 200ms ease, background-color 200ms ease;
   display: block;
 }
 
-/* Form status banner */
+.ui-input::placeholder {
+  color: var(--text-muted-color);
+  opacity: 0.7;
+}
+
+.ui-input:focus {
+  outline: none;
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px var(--green-glow);
+}
+
+.ui-input.error {
+  border-color: #ef4444;
+}
+
+.field-error {
+  font-size: 0.8rem;
+  color: #ef4444;
+  font-weight: 600;
+  min-height: 1.1em;
+}
+
 .form-status {
   padding: 12px 16px;
   border-radius: var(--radius-small);
-  font-size: 0.88rem;
-  font-weight: 500;
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
 .form-status.success {
-  background: rgba(0, 208, 137, 0.1);
-  border: 1px solid rgba(0, 208, 137, 0.4);
+  background: rgba(0, 208, 137, 0.15);
+  border: 1px solid var(--green);
   color: var(--green);
 }
 
 .form-status.error-msg {
-  background: rgba(248, 113, 113, 0.1);
-  border: 1px solid rgba(248, 113, 113, 0.4);
-  color: #f87171;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid #ef4444;
+  color: #ef4444;
 }
 
-/* Info sidepanel */
+/* Sidepanel */
 .contact-sidepanel {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 24px;
 }
 
-/* Contact info card rows */
 .contact-info-card {
   display: flex;
   flex-direction: column;
@@ -700,236 +910,170 @@ nav {
 
 .contact-row {
   display: flex;
-  align-items: flex-start;
-  gap: 14px;
+  align-items: center;
+  gap: 16px;
 }
 
 .contact-icon-wrap {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-small);
+  border: 2px solid var(--card-border);
+  background: var(--body-bg);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-small);
-  background: rgba(71, 85, 105, 0.25);
-  border: 1px solid var(--grey);
   color: var(--green);
   flex-shrink: 0;
 }
 
-.contact-row-text {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
 .contact-row-label {
   font-size: 0.78rem;
+  color: var(--text-muted-color);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-muted-color);
+  letter-spacing: 0.05em;
+  margin-bottom: 2px;
 }
 
+.contact-value-link,
 .contact-row-value {
-  font-size: 0.92rem;
-  color: var(--text-color);
-}
-
-.contact-value-link {
-  font-size: 0.92rem;
-  color: var(--green);
+  font-size: 1rem;
   font-weight: 700;
+  color: var(--text-heading);
   transition: color 200ms ease;
 }
 
 .contact-value-link:hover {
-  color: #fff;
-  text-decoration: underline;
-}
-
-/* Social links card */
-.social-links-card {
-  display: flex;
-  flex-direction: column;
+  color: var(--green);
 }
 
 .social-links {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 10px;
 }
 
 .social-btn {
-  justify-content: flex-start;
+  font-size: 0.85rem;
+  padding: 7px 14px;
 }
 
 /* ----------------------------------------------------------------
-   17. FOOTER
+   14. FOOTER
    ---------------------------------------------------------------- */
 footer {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 24px;
-  font-size: 14px;
+  width: 100%;
+  padding: 40px var(--container-padding);
+  background-color: var(--footer-bg);
   border-top: 1px solid var(--surface-divider);
-  padding: 60px 20px 40px;
-  text-align: center;
-  /* Scroll-reveal via animation-timeline */
-  animation: fadeIn linear;
-  animation-timeline: view();
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  font-size: 0.85rem;
+  color: var(--text-muted-color);
+  gap: 20px;
+  transition: background-color 250ms ease;
 }
 
 .footer-text-section {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  color: var(--text-muted-color);
+}
+
+.heart-beat {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: var(--green);
+  border-radius: 50%;
+  animation: heart-beat 1.5s ease-in-out infinite;
+  vertical-align: middle;
+  margin: 0 4px;
+}
+
+@keyframes heart-beat {
+  0%   { transform: scale(1); }
+  20%  { transform: scale(1.3); }
+  100% { transform: scale(1); }
 }
 
 .footer-links {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
+  gap: 20px;
 }
 
 .footer-links a {
-  color: var(--text-color);
+  color: var(--text-muted-color);
   font-weight: 700;
   transition: color 200ms ease;
 }
 
 .footer-links a:hover {
-  color: #fff;
-}
-
-/* Heartbeat */
-.heart-beat {
-  display: inline-flex;
-  animation: 0.9s linear infinite heart-beat;
+  color: var(--green);
 }
 
 /* ----------------------------------------------------------------
-   18. CRT PIXELATED OVERLAY  (letsch.dev signature visual effect)
-   ---------------------------------------------------------------- */
-.pixelated-overlay {
-  position: fixed;
-  z-index: 999;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  background:
-    repeating-linear-gradient(
-      #0000 0px 2px,
-      #0001 2px 4px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      #ff000004 0px 1px,
-      #00ff0004 1px 2px,
-      #0000ff04 2px 3px
-    );
-  backdrop-filter: saturate(105%) brightness(102%);
-}
-
-/* ----------------------------------------------------------------
-   19. RESPONSIVE — TABLET (≤ 900px)
+   15. RESPONSIVE BREAKPOINTS
    ---------------------------------------------------------------- */
 @media (max-width: 900px) {
-  :root {
-    --container-padding: 24px;
-  }
-
-  .section-wrapper {
-    padding: 60px var(--container-padding) 80px;
-  }
-
-  /* Hero: stack portrait above text */
-  .hero-inner {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 40px;
-  }
-
-  .hero-portrait,
-  .portrait-fallback {
-    width: 260px;
-    height: 260px;
-  }
-
-  /* Projects: single column */
-  .projects-columns {
-    grid-template-columns: 1fr;
-  }
-
-  /* Contact: stack */
+  .projects-columns,
   .contact-grid {
     grid-template-columns: 1fr;
-  }
-}
-
-/* ----------------------------------------------------------------
-   20. RESPONSIVE — MOBILE (≤ 600px)
-   ---------------------------------------------------------------- */
-@media (max-width: 600px) {
-  :root {
-    --container-padding: 20px;
-  }
-
-  .section-wrapper {
-    padding: 40px var(--container-padding) 70px;
-  }
-
-  /* Hide nav logo & links on mobile (letsch.dev behaviour) */
-  .hide-on-mobile {
-    display: none;
   }
 
   .nav-links {
     display: none;
   }
 
-  nav {
-    justify-content: space-between;
-  }
-
-  .hero-portrait,
-  .portrait-fallback {
-    width: 200px;
-    height: 200px;
-  }
-
-  .name {
-    font-size: 2.2rem;
-  }
-
-  .hero-buttons {
+  footer {
     flex-direction: column;
-  }
-
-  .hero-buttons .btn-outline {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .footer-links {
-    flex-wrap: wrap;
-    gap: 16px;
+    text-align: center;
   }
 }
 
-/* ----------------------------------------------------------------
-   21. PRINT
-   ---------------------------------------------------------------- */
-@media print {
-  .pixelated-overlay,
-  .nav-wrapper,
-  .hero-buttons,
-  .contact-form-card { display: none !important; }
-  body { background: white; color: black; }
+@media (max-width: 600px) {
+  :root {
+    --container-padding: 20px;
+  }
+
+  .section-wrapper {
+    padding: 50px var(--container-padding) 70px;
+  }
+
+  .hero-cover-banner {
+    height: 180px;
+    margin-bottom: -70px;
+  }
+
+  .hero-portrait {
+    width: 140px;
+    height: 140px;
+  }
+
+  .portrait-fallback {
+    width: 140px;
+    height: 140px;
+  }
+
+  .code-block {
+    font-size: 0.82rem;
+  }
+
+  .line-num {
+    width: 1.6rem;
+    margin-right: 0.8rem;
+  }
+
+  .hero-buttons-centered {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-buttons-centered .btn-outline {
+    width: 100%;
+  }
 }

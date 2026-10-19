@@ -21,6 +21,65 @@ const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => root.querySelectorAll(sel);
 
 /* ----------------------------------------------------------------
+   0. LIGHT / DARK THEME TOGGLE
+   ---------------------------------------------------------------- */
+(function initTheme() {
+  const toggleBtn = $('#theme-toggle');
+  const storedTheme = localStorage.getItem('theme');
+  const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+
+  // Initial theme (default dark, respect stored preference or system)
+  const initialTheme = storedTheme ? storedTheme : (prefersLight ? 'light' : 'dark');
+  document.documentElement.setAttribute('data-theme', initialTheme);
+
+  if (!toggleBtn) return;
+
+  toggleBtn.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme') || 'dark';
+    const nextTheme = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', nextTheme);
+    localStorage.setItem('theme', nextTheme);
+  });
+})();
+
+/* ----------------------------------------------------------------
+   0.1 CODE EDITOR COPY BUTTON
+   ---------------------------------------------------------------- */
+(function initCopyCode() {
+  const btn = $('#btn-copy-tech');
+  if (!btn) return;
+
+  const rawJson = `// core technologies & toolbelt
+{
+  "languages": [ "Java", "Python", "C", "C++", "C#", "Kotlin", "JavaScript" ],
+  "databases": [ "MySQL", "MongoDB", "SQLite" ],
+  "mobile": [ "Kotlin", "Android Studio" ],
+  "web_backend": [ "HTML5", "CSS3", "JavaScript", "FastAPI" ],
+  "desktop_gui": [ "JavaSwing", "JavaFX" ],
+  "embedded_iot": [ "ESP32", "Arduino", "Circuit Design", "IoT" ],
+  "ai_tools": [ "ChatGPT", "Claude", "Gemini" ]
+}`;
+
+  btn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(rawJson);
+      const textSpan = btn.querySelector('.copy-text');
+      if (textSpan) textSpan.textContent = 'Copied!';
+      btn.style.borderColor = 'var(--green)';
+      btn.style.color = 'var(--green)';
+
+      setTimeout(() => {
+        if (textSpan) textSpan.textContent = 'Copy';
+        btn.style.borderColor = '';
+        btn.style.color = '';
+      }, 2000);
+    } catch (err) {
+      console.warn('Clipboard copy failed:', err);
+    }
+  });
+})();
+
+/* ----------------------------------------------------------------
    1. NAV CONTACT BUTTON  (letsch.dev: clicks scroll to #contact)
    ---------------------------------------------------------------- */
 (function initNavContact() {
