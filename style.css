@@ -1,0 +1,935 @@
+/* ================================================================
+   REDINE KYLE V. ELEJORDE — PORTFOLIO
+   Faithfully replicating the letsch.dev design system:
+   · Background: rgb(17, 24, 39)  — near-black
+   · Cards:      #1d293d          — dark blue-slate
+   · Accent:     #00d089          — vivid green
+   · Font:       Fira Code        — monospace throughout
+   · Buttons:    bordered rect, fill on hover
+   · CRT pixelated overlay
+   ================================================================ */
+
+/* ----------------------------------------------------------------
+   1. CSS CUSTOM PROPERTIES  (lifted directly from letsch.dev source)
+   ---------------------------------------------------------------- */
+:root {
+  --container-width:    1100px;
+  --container-padding:  40px;
+
+  /* Accent palette */
+  --green:    #00d089;
+  --cyan:     #14aadb;
+  --violet:   #9c72fd;
+  --orange:   #ff9999;
+
+  /* Backgrounds */
+  --bg-blue:      #1d2942;
+  --dark-blue:    #0f172b;
+  --body-bg:      rgb(17, 24, 39);
+  --card-bg:      #1d293d;
+
+  /* Text */
+  --text-color:       rgb(209, 213, 219);
+  --text-muted-color: #969dab;
+  --grey:             #475569;
+
+  /* Surface / borders */
+  --surface-divider: rgba(55, 65, 81, 0.3);
+
+  /* Component tokens */
+  --radius-big:      16px;
+  --radius-small:    10px;
+  --card-padding:    24px;
+  --control-padding: 8px 16px;
+  --nav-height:      64px;
+
+  /* AI tool colors */
+  --gpt-green:    #10a37f;
+  --gemini-purple:#8b5cf6;
+  --claude-amber: #d97706;
+
+  scroll-padding-top: 100px;
+}
+
+/* ----------------------------------------------------------------
+   2. CSS RESET
+   ---------------------------------------------------------------- */
+:where(
+  html, body, div, span, button, h1, h2, h3, p, a,
+  em, strong, ul, ol, li, form, label, input, textarea,
+  article, aside, section, header, nav, footer, figure
+) {
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  background-color: transparent;
+  text-decoration: none;
+  color: inherit;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  /* Green-tinted scrollbar to match letsch.dev */
+  scrollbar-color: var(--green) var(--dark-blue);
+  scrollbar-width: thin;
+}
+
+:where(ol, ul) { list-style-type: none; }
+:where(button)  { cursor: pointer; }
+
+/* ----------------------------------------------------------------
+   3. BASE  (body / html)
+   ---------------------------------------------------------------- */
+html, body {
+  font-family:    'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  letter-spacing: -0.025rem;
+  word-spacing:   -0.125rem;
+  font-size:      16px;
+  line-height:    1.5;
+  background-color: var(--body-bg);
+  color:          var(--text-color);
+  scroll-behavior: smooth;
+  overflow-x:     hidden;
+  text-align:     left;
+  word-wrap:      break-word;
+  overflow-wrap:  break-word;
+}
+
+/* ----------------------------------------------------------------
+   4. SELECTION
+   ---------------------------------------------------------------- */
+::selection {
+  background-color: var(--green);
+  color: var(--dark-blue);
+}
+
+/* ----------------------------------------------------------------
+   5. FADE-IN ANIMATION (letsch.dev uses this on sections)
+   ---------------------------------------------------------------- */
+@keyframes fadeIn {
+  0%  { opacity: 0; transform: translateY(20px); }
+  15% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heart-beat {
+  0%   { transform: scale(1); }
+  20%  { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+
+/* ----------------------------------------------------------------
+   6. LAYOUT UTILITIES
+   ---------------------------------------------------------------- */
+.section-wrapper {
+  width: 100%;
+  display: flex;
+  padding: 90px var(--container-padding) 120px;
+  justify-content: center;
+  align-items: flex-start;
+  /* Scroll-reveal animation */
+  animation: fadeIn linear;
+  animation-timeline: view();
+}
+
+.section-container {
+  width: var(--container-width);
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Gradient backgrounds (matching letsch.dev alternating sections) */
+.bg-gradient-bottom {
+  background: linear-gradient(to bottom, var(--dark-blue), var(--bg-blue));
+}
+
+.bg-gradient-top {
+  background: linear-gradient(to top, var(--dark-blue), var(--bg-blue));
+}
+
+/* ----------------------------------------------------------------
+   7. TYPOGRAPHY
+   ---------------------------------------------------------------- */
+h2 {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 700;
+  color: var(--text-color);
+  letter-spacing: -0.03em;
+  margin-bottom: 40px;
+}
+
+h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+p {
+  color: var(--text-muted-color);
+  line-height: 1.75;
+}
+
+strong {
+  color: var(--text-color);
+  font-weight: 700;
+}
+
+/* ----------------------------------------------------------------
+   8. UI CARD  (letsch.dev .ui-card)
+   ---------------------------------------------------------------- */
+.ui-card {
+  background: var(--card-bg);
+  border: 2px solid var(--grey);
+  border-radius: var(--radius-big);
+  padding: var(--card-padding);
+  transition: border-color 250ms ease;
+}
+
+.ui-card:hover {
+  border-color: var(--green);
+}
+
+/* ----------------------------------------------------------------
+   9. CHIP / BADGE  (letsch.dev .chip)
+   ---------------------------------------------------------------- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+/* Slate variant — tech tags inside cards */
+.chip--slate {
+  background-color: rgba(71, 85, 105, 0.25);
+  border: 1px solid var(--grey);
+  color: var(--text-muted-color);
+}
+
+/* Green variant — category label (like "Current Employment") */
+.chip--green {
+  background-color: rgba(0, 208, 137, 0.12);
+  border: 1px solid rgba(0, 208, 137, 0.4);
+  color: var(--green);
+}
+
+/* AI tool variants */
+.chip--ai {
+  font-size: 0.85rem;
+  padding: 6px 16px;
+  background-color: rgba(71, 85, 105, 0.2);
+  border: 1px solid var(--grey);
+  color: var(--text-color);
+}
+
+.chip--ai-gpt:hover    { border-color: var(--gpt-green);    color: var(--gpt-green); }
+.chip--ai-gemini:hover { border-color: var(--gemini-purple);color: var(--gemini-purple); }
+.chip--ai-claude:hover { border-color: var(--claude-amber); color: var(--claude-amber); }
+
+/* AI colored dots */
+.ai-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.ai-dot--gpt    { background: var(--gpt-green);    box-shadow: 0 0 6px var(--gpt-green); }
+.ai-dot--gemini { background: var(--gemini-purple); box-shadow: 0 0 6px var(--gemini-purple); }
+.ai-dot--claude { background: var(--claude-amber);  box-shadow: 0 0 6px var(--claude-amber); }
+
+/* ----------------------------------------------------------------
+   10. BUTTONS  (letsch.dev .btn-outline — bordered rect, fills on hover)
+   ---------------------------------------------------------------- */
+.btn-outline {
+  --highlight-color: var(--green);
+  color: var(--highlight-color);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 2px solid var(--highlight-color);
+  border-radius: var(--radius-small);
+  text-decoration: none;
+  transition: all 300ms ease;
+  font-weight: 700;
+  font-family: inherit;
+  font-size: 0.9rem;
+  padding: 8px 18px;
+  background: transparent;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-outline:hover {
+  background: var(--highlight-color);
+  color: var(--dark-blue);
+}
+
+.btn-outline:focus-visible {
+  outline: 2px solid var(--highlight-color);
+  outline-offset: 3px;
+}
+
+/* Per-button accent overrides */
+.btn-facebook {
+  --highlight-color: #4267B2;
+}
+
+.btn-cv {
+  --highlight-color: var(--cyan);
+}
+
+/* ----------------------------------------------------------------
+   11. INPUT  (letsch.dev .ui-input)
+   ---------------------------------------------------------------- */
+.ui-input {
+  width: 100%;
+  min-height: 40px;
+  border: 2px solid var(--grey);
+  border-radius: var(--radius-small);
+  padding: var(--control-padding);
+  background: var(--dark-blue);
+  color: var(--text-color);
+  font: inherit;
+  font-size: 15px;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+  display: block;
+}
+
+.ui-input::placeholder {
+  color: #666;
+}
+
+.ui-input:hover {
+  border-color: #64748b;
+}
+
+.ui-input:focus {
+  outline: none;
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(0, 208, 137, 0.15);
+}
+
+.ui-input.error {
+  border-color: #f87171;
+}
+
+textarea.ui-input {
+  resize: vertical;
+  min-height: 140px;
+  line-height: 1.6;
+}
+
+/* ----------------------------------------------------------------
+   12. NAVBAR
+   ---------------------------------------------------------------- */
+.nav-wrapper {
+  height: var(--nav-height);
+}
+
+.nav-inner-wrapper {
+  width: 100%;
+  background-color: rgba(17, 24, 39, 0.6);
+  border-bottom: 1px solid var(--surface-divider);
+  height: var(--nav-height);
+  padding: 0 var(--container-padding);
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+}
+
+nav {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Logo */
+.nav-logo {
+  font-family: 'Fira Code', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--green);
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border: 2px solid var(--green);
+  border-radius: 6px;
+  transition: background-color 200ms ease;
+}
+
+.nav-logo:hover {
+  background-color: rgba(0, 208, 137, 0.1);
+}
+
+/* Nav link group */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-left: auto;
+}
+
+.nav-link {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.92rem;
+  transition: color 200ms ease;
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--green);
+  border-radius: 2px;
+  transition: width 250ms ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #fff;
+}
+
+.nav-link.active::after,
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Contact button in nav */
+#nav-contact-button {
+  font-weight: 700;
+}
+
+/* ----------------------------------------------------------------
+   13. HERO / ABOUT SECTION
+   ---------------------------------------------------------------- */
+.hero-inner {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+}
+
+/* Profile portrait (LEFT) */
+.hero-portrait-wrapper {
+  flex-shrink: 0;
+  position: relative;
+}
+
+.hero-portrait {
+  width: 340px;
+  height: 340px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: var(--radius-big);
+  border: 2px solid var(--grey);
+  display: block;
+  transition: border-color 300ms ease;
+}
+
+.hero-portrait:hover {
+  border-color: var(--green);
+}
+
+/* Initials fallback shown when profile.jpg is missing */
+.portrait-fallback {
+  width: 340px;
+  height: 340px;
+  border-radius: var(--radius-big);
+  border: 2px solid var(--grey);
+  background: linear-gradient(135deg, var(--bg-blue) 0%, var(--dark-blue) 100%);
+  display: none; /* toggled by JS onerror */
+  align-items: center;
+  justify-content: center;
+}
+
+.portrait-fallback span {
+  font-family: 'Fira Code', monospace;
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--green);
+  letter-spacing: 0.1em;
+}
+
+/* Text block (RIGHT) */
+.hero-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.hero-dots {
+  margin-bottom: 24px;
+}
+
+.h1-main {
+  margin-bottom: 12px;
+}
+
+.hey-there {
+  font-size: 1rem;
+  color: var(--text-muted-color);
+  font-weight: 400;
+  margin-bottom: 6px;
+}
+
+.name {
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+
+.h1-sub {
+  font-size: 1.05rem;
+  color: var(--green);
+  font-weight: 700;
+  margin-bottom: 24px;
+  letter-spacing: 0.01em;
+}
+
+.hero-bio {
+  font-size: 0.95rem;
+  color: var(--text-muted-color);
+  line-height: 1.8;
+  margin-bottom: 32px;
+  max-width: 52ch;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ----------------------------------------------------------------
+   14. FEATURED PROJECTS SECTION
+   ---------------------------------------------------------------- */
+.projects-columns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.project-text h3 {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.project-text p {
+  font-size: 0.9rem;
+  line-height: 1.75;
+}
+
+.used-technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+}
+
+/* Divider line above the GitHub button (letsch.dev has this separator) */
+.card-separator {
+  height: 1px;
+  background: var(--surface-divider);
+  border: none;
+  margin: 4px 0;
+}
+
+.project-source-btn {
+  align-self: flex-start;
+  font-size: 0.85rem;
+  padding: 7px 16px;
+}
+
+/* ----------------------------------------------------------------
+   15. TECH STACK SECTION
+   ---------------------------------------------------------------- */
+.tech-category {
+  margin-bottom: 40px;
+}
+
+.tech-category-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted-color);
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--surface-divider);
+}
+
+.tech-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Hover glow on slate chips */
+.chip--slate {
+  transition: border-color 200ms ease, color 200ms ease, background-color 200ms ease;
+  cursor: default;
+}
+
+.chip--slate:hover {
+  border-color: var(--green);
+  color: var(--green);
+  background-color: rgba(0, 208, 137, 0.08);
+}
+
+/* ----------------------------------------------------------------
+   16. CONTACT SECTION
+   ---------------------------------------------------------------- */
+/* "GET IN TOUCH" header block */
+.contact-header {
+  margin-bottom: 40px;
+}
+
+.get-in-touch-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 12px;
+}
+
+.contact-separator-line {
+  height: 2px;
+  width: 60px;
+  background: var(--green);
+  margin-top: 16px;
+  border-radius: 2px;
+}
+
+/* Contact grid: form left, info right */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* Form card */
+.contact-form-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-form-card label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label-text {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-muted-color);
+  letter-spacing: 0.04em;
+}
+
+.field-error {
+  font-size: 0.78rem;
+  color: #f87171;
+  min-height: 1em;
+  display: block;
+}
+
+/* Form status banner */
+.form-status {
+  padding: 12px 16px;
+  border-radius: var(--radius-small);
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
+.form-status.success {
+  background: rgba(0, 208, 137, 0.1);
+  border: 1px solid rgba(0, 208, 137, 0.4);
+  color: var(--green);
+}
+
+.form-status.error-msg {
+  background: rgba(248, 113, 113, 0.1);
+  border: 1px solid rgba(248, 113, 113, 0.4);
+  color: #f87171;
+}
+
+/* Info sidepanel */
+.contact-sidepanel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Contact info card rows */
+.contact-info-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.contact-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-small);
+  background: rgba(71, 85, 105, 0.25);
+  border: 1px solid var(--grey);
+  color: var(--green);
+  flex-shrink: 0;
+}
+
+.contact-row-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.contact-row-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted-color);
+}
+
+.contact-row-value {
+  font-size: 0.92rem;
+  color: var(--text-color);
+}
+
+.contact-value-link {
+  font-size: 0.92rem;
+  color: var(--green);
+  font-weight: 700;
+  transition: color 200ms ease;
+}
+
+.contact-value-link:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Social links card */
+.social-links-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.social-btn {
+  justify-content: flex-start;
+}
+
+/* ----------------------------------------------------------------
+   17. FOOTER
+   ---------------------------------------------------------------- */
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 24px;
+  font-size: 14px;
+  border-top: 1px solid var(--surface-divider);
+  padding: 60px 20px 40px;
+  text-align: center;
+  /* Scroll-reveal via animation-timeline */
+  animation: fadeIn linear;
+  animation-timeline: view();
+}
+
+.footer-text-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--text-muted-color);
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.footer-links a {
+  color: var(--text-color);
+  font-weight: 700;
+  transition: color 200ms ease;
+}
+
+.footer-links a:hover {
+  color: #fff;
+}
+
+/* Heartbeat */
+.heart-beat {
+  display: inline-flex;
+  animation: 0.9s linear infinite heart-beat;
+}
+
+/* ----------------------------------------------------------------
+   18. CRT PIXELATED OVERLAY  (letsch.dev signature visual effect)
+   ---------------------------------------------------------------- */
+.pixelated-overlay {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      #0000 0px 2px,
+      #0001 2px 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      #ff000004 0px 1px,
+      #00ff0004 1px 2px,
+      #0000ff04 2px 3px
+    );
+  backdrop-filter: saturate(105%) brightness(102%);
+}
+
+/* ----------------------------------------------------------------
+   19. RESPONSIVE — TABLET (≤ 900px)
+   ---------------------------------------------------------------- */
+@media (max-width: 900px) {
+  :root {
+    --container-padding: 24px;
+  }
+
+  .section-wrapper {
+    padding: 60px var(--container-padding) 80px;
+  }
+
+  /* Hero: stack portrait above text */
+  .hero-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+  }
+
+  .hero-portrait,
+  .portrait-fallback {
+    width: 260px;
+    height: 260px;
+  }
+
+  /* Projects: single column */
+  .projects-columns {
+    grid-template-columns: 1fr;
+  }
+
+  /* Contact: stack */
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ----------------------------------------------------------------
+   20. RESPONSIVE — MOBILE (≤ 600px)
+   ---------------------------------------------------------------- */
+@media (max-width: 600px) {
+  :root {
+    --container-padding: 20px;
+  }
+
+  .section-wrapper {
+    padding: 40px var(--container-padding) 70px;
+  }
+
+  /* Hide nav logo & links on mobile (letsch.dev behaviour) */
+  .hide-on-mobile {
+    display: none;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  nav {
+    justify-content: space-between;
+  }
+
+  .hero-portrait,
+  .portrait-fallback {
+    width: 200px;
+    height: 200px;
+  }
+
+  .name {
+    font-size: 2.2rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+  .hero-buttons .btn-outline {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .footer-links {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+}
+
+/* ----------------------------------------------------------------
+   21. PRINT
+   ---------------------------------------------------------------- */
+@media print {
+  .pixelated-overlay,
+  .nav-wrapper,
+  .hero-buttons,
+  .contact-form-card { display: none !important; }
+  body { background: white; color: black; }
+}

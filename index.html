@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ─── Meta ─────────────────────────────────────────────── -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Redine Kyle V. Elejorde — Computer Engineering Student passionate about embedded systems, mobile & desktop software development." />
+  <title>Hello, Welcome to my Portfolio</title>
+
+  <!-- Google Fonts: Fira Code (matches letsch.dev's monospace-first typography) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ════════════════════════════════════════════════════════
+       PIXELATED CRT OVERLAY  (letsch.dev signature effect)
+       ════════════════════════════════════════════════════════ -->
+  <div class="pixelated-overlay" aria-hidden="true"></div>
+
+  <!-- ════════════════════════════════════════════════════════
+       NAVIGATION
+       ════════════════════════════════════════════════════════ -->
+  <div class="nav-wrapper">
+    <div class="nav-inner-wrapper">
+      <nav>
+        <!-- Logo -->
+        <a href="#about" class="nav-logo hide-on-mobile" title="Home">RED</a>
+
+        <!-- Links -->
+        <div class="nav-links">
+          <a href="#about"      class="nav-link">About</a>
+          <a href="#projects"   class="nav-link">Projects</a>
+          <a href="#tech-stack" class="nav-link">Tech Stack</a>
+        </div>
+
+        <!-- Contact CTA button (matches letsch.dev pattern exactly) -->
+        <button class="btn-outline" id="nav-contact-button">Contact</button>
+      </nav>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ══════════════════════════════════════════════════════
+         HERO / ABOUT
+         ══════════════════════════════════════════════════════ -->
+    <div class="section-wrapper bg-gradient-bottom" id="about">
+      <div class="section-container hero-inner">
+
+        <!-- Profile Photo (LEFT side, matching letsch.dev portrait position) -->
+        <div class="hero-portrait-wrapper">
+          <!--
+            Drop your headshot as "profile.jpg" in the same folder.
+            The styled initials fallback shows automatically if the file is missing.
+          -->
+          <img
+            src="images/profile.png"
+            alt="Portrait of Redine Kyle V. Elejorde"
+            class="hero-portrait"
+            width="340"
+            height="340"
+            loading="eager"
+            onerror="this.style.display='none';document.getElementById('portrait-fallback').style.display='flex';"
+          />
+          <div id="portrait-fallback" class="portrait-fallback">
+            <span>RK</span>
+          </div>
+        </div>
+
+        <!-- Text content (RIGHT side) -->
+        <section class="hero-text">
+          <!-- Decorative dots SVG (letsch.dev has this decorative element) -->
+          <div class="hero-dots" aria-hidden="true">
+            <svg width="80" height="20" viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="5"  cy="10" r="4" fill="var(--green)" opacity="0.6"/>
+              <circle cx="20" cy="10" r="4" fill="var(--green)" opacity="0.4"/>
+              <circle cx="35" cy="10" r="4" fill="var(--green)" opacity="0.25"/>
+              <circle cx="50" cy="10" r="4" fill="var(--green)" opacity="0.12"/>
+            </svg>
+          </div>
+
+          <h1>
+            <div class="h1-main">
+              <div class="hey-there">Hey there, I'm</div>
+              <div class="name">Redine Kyle<br/>V. Elejorde</div>
+            </div>
+            <div class="h1-sub">Computer Engineering Student.</div>
+          </h1>
+
+          <p class="hero-bio">
+            Computer Engineering student passionate about <strong>embedded systems</strong>,
+            <strong>mobile &amp; desktop software development</strong>,
+            <strong>database architecture</strong>, and
+            <strong>smart tech integrations</strong>.
+            I build things that bridge hardware and software to solve real-world problems.
+          </p>
+
+          <!-- Action buttons — matching letsch.dev btn-outline style -->
+          <div class="hero-buttons">
+            <a href="https://github.com/Redine1" target="_blank" rel="noopener noreferrer" class="btn-outline btn-github">
+              <!-- GitHub icon -->
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+              </svg>
+              <span>GitHub</span>
+            </a>
+
+            <a href="https://www.facebook.com/redinekyle.elejorde.9" target="_blank" rel="noopener noreferrer" class="btn-outline btn-facebook">
+              <!-- Facebook icon -->
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+              <span>Facebook</span>
+            </a>
+
+            <button class="btn-outline btn-email" id="email-button">
+              <!-- Email icon -->
+              <svg width="20" height="18" viewBox="0 0 22 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="1" y="1" width="20" height="16" rx="2"/>
+                <polyline points="1,1 11,10 21,1"/>
+              </svg>
+              <span>Email</span>
+            </button>
+
+            <a href="resume.pdf" download="Redine_Kyle_Elejorde_CV.pdf" class="btn-outline btn-cv">
+              <!-- Download icon -->
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              <span>Download CV</span>
+            </a>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════
+         FEATURED PROJECTS
+         ══════════════════════════════════════════════════════ -->
+    <section class="section-wrapper bg-gradient-top" id="projects">
+      <div class="section-container">
+        <h2>Featured Projects</h2>
+
+        <div class="projects-columns">
+
+          <!-- Project 1 -->
+          <article class="ui-card project-card">
+            <div class="chip chip--green">Embedded Systems · IoT</div>
+            <div class="project-text">
+              <h3>Solar-Powered Subsurface Irrigation System</h3>
+              <p>
+                An autonomous smart irrigation system powered by solar energy. Uses ESP32 microcontrollers
+                and soil moisture sensors to deliver precise subsurface watering — reducing water waste
+                and enabling off-grid agricultural automation.
+              </p>
+            </div>
+            <div class="used-technologies">
+              <div class="chip chip--slate">ESP32</div>
+              <div class="chip chip--slate">Arduino</div>
+              <div class="chip chip--slate">C++</div>
+              <div class="chip chip--slate">IoT</div>
+              <div class="chip chip--slate">Solar Energy</div>
+            </div>
+            <div class="card-separator"></div>
+            <a href="https://github.com/Redine1" target="_blank" rel="noopener noreferrer" class="btn-outline project-source-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+              </svg>
+              View on GitHub
+            </a>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="ui-card project-card">
+            <div class="chip chip--slate">Mobile · Backend</div>
+            <div class="project-text">
+              <h3>FLOODGUARD</h3>
+              <p>
+                A real-time flood monitoring and early-warning Android application backed by a Python
+                FastAPI server. Aggregates sensor data, delivers push alerts, and provides live
+                flood-risk maps to help communities prepare and respond faster.
+              </p>
+            </div>
+            <div class="used-technologies">
+              <div class="chip chip--slate">Python</div>
+              <div class="chip chip--slate">FastAPI</div>
+              <div class="chip chip--slate">Kotlin</div>
+              <div class="chip chip--slate">Android Studio</div>
+            </div>
+            <div class="card-separator"></div>
+            <a href="https://github.com/Redine1" target="_blank" rel="noopener noreferrer" class="btn-outline project-source-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+              </svg>
+              View on GitHub
+            </a>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="ui-card project-card">
+            <div class="chip chip--slate">Desktop · Database</div>
+            <div class="project-text">
+              <h3>Event Management System</h3>
+              <p>
+                A full-featured desktop application for planning and managing events. Built with Java Swing
+                for a polished GUI and backed by MySQL for robust data persistence — handling scheduling,
+                attendee registration, and venue management.
+              </p>
+            </div>
+            <div class="used-technologies">
+              <div class="chip chip--slate">Java</div>
+              <div class="chip chip--slate">JavaSwing</div>
+              <div class="chip chip--slate">MySQL</div>
+            </div>
+            <div class="card-separator"></div>
+            <a href="https://github.com/Redine1" target="_blank" rel="noopener noreferrer" class="btn-outline project-source-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+              </svg>
+              View on GitHub
+            </a>
+          </article>
+
+          <!-- Project 4 -->
+          <article class="ui-card project-card">
+            <div class="chip chip--slate">Embedded Systems · Hardware</div>
+            <div class="project-text">
+              <h3>NeuroComm Board</h3>
+              <p>
+                A custom-designed communication interface board built around the ESP32. Features tailored
+                circuit design and firmware for neural-signal-inspired wireless communication, enabling
+                low-latency data exchange between embedded nodes.
+              </p>
+            </div>
+            <div class="used-technologies">
+              <div class="chip chip--slate">ESP32</div>
+              <div class="chip chip--slate">Circuit Design</div>
+              <div class="chip chip--slate">C++</div>
+            </div>
+            <div class="card-separator"></div>
+            <a href="https://github.com/Redine1" target="_blank" rel="noopener noreferrer" class="btn-outline project-source-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+              </svg>
+              View on GitHub
+            </a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════
+         TECH STACK & TOOLS
+         ══════════════════════════════════════════════════════ -->
+    <section class="section-wrapper" id="tech-stack">
+      <div class="section-container">
+        <h2>Tech Stack &amp; Tools</h2>
+
+        <!-- Core Technologies -->
+        <div class="tech-category">
+          <div class="tech-category-label">Core Technologies &amp; Databases</div>
+          <div class="tech-chips">
+            <div class="chip chip--slate">HTML</div>
+            <div class="chip chip--slate">CSS</div>
+            <div class="chip chip--slate">JavaScript</div>
+            <div class="chip chip--slate">Java</div>
+            <div class="chip chip--slate">Python</div>
+            <div class="chip chip--slate">C</div>
+            <div class="chip chip--slate">C++</div>
+            <div class="chip chip--slate">C#</div>
+            <div class="chip chip--slate">Kotlin</div>
+            <div class="chip chip--slate">Android Studio</div>
+            <div class="chip chip--slate">MySQL</div>
+            <div class="chip chip--slate">MongoDB</div>
+            <div class="chip chip--slate">SQLite</div>
+            <div class="chip chip--slate">FastAPI</div>
+            <div class="chip chip--slate">JavaSwing</div>
+            <div class="chip chip--slate">JavaFX</div>
+          </div>
+        </div>
+
+        <!-- AI Tools -->
+        <div class="tech-category">
+          <div class="tech-category-label">AI Tools I Use</div>
+          <div class="tech-chips">
+            <div class="chip chip--ai chip--ai-gpt">
+              <span class="ai-dot ai-dot--gpt"></span>ChatGPT
+            </div>
+            <div class="chip chip--ai chip--ai-gemini">
+              <span class="ai-dot ai-dot--gemini"></span>Gemini
+            </div>
+            <div class="chip chip--ai chip--ai-claude">
+              <span class="ai-dot ai-dot--claude"></span>Claude
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════
+         CONTACT
+         ══════════════════════════════════════════════════════ -->
+    <section class="section-wrapper" id="contact">
+      <div class="section-container">
+
+        <!-- Section header (exact letsch.dev structure) -->
+        <div class="contact-header">
+          <div class="get-in-touch-label">GET IN TOUCH</div>
+          <h2>Let's work together</h2>
+          <div class="contact-separator-line"></div>
+        </div>
+
+        <div class="contact-grid">
+
+          <!-- Contact Form (LEFT) -->
+          <form class="ui-card contact-form-card" id="contact-form" novalidate>
+            <div id="form-status" class="form-status" role="alert" aria-live="polite" hidden></div>
+
+            <label>
+              <div class="label-text">Email Address</div>
+              <input
+                type="email"
+                id="sender-email"
+                class="ui-input"
+                placeholder="your email address"
+                required
+              />
+              <span class="field-error" id="email-error"></span>
+            </label>
+
+            <label>
+              <div class="label-text">Subject</div>
+              <input
+                type="text"
+                id="sender-subject"
+                class="ui-input"
+                placeholder="What's this about?"
+                required
+              />
+              <span class="field-error" id="subject-error"></span>
+            </label>
+
+            <label>
+              <div class="label-text">Message</div>
+              <textarea
+                id="sender-message"
+                rows="6"
+                class="ui-input"
+                placeholder="Write your message here…"
+                required
+              ></textarea>
+              <span class="field-error" id="message-error"></span>
+            </label>
+
+            <button type="submit" class="btn-outline" id="send-button">Send Message</button>
+          </form>
+
+          <!-- Info Panel (RIGHT) -->
+          <div class="contact-sidepanel">
+
+            <!-- Contact info card -->
+            <div class="ui-card contact-info-card">
+              <!-- Email -->
+              <div class="contact-row">
+                <div class="contact-icon-wrap">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/>
+                    <rect x="2" y="4" width="20" height="16" rx="2"/>
+                  </svg>
+                </div>
+                <div class="contact-row-text">
+                  <div class="contact-row-label">Email</div>
+                  <a href="mailto:kriyuchi13@gmail.com" class="contact-value-link">kriyuchi13@gmail.com</a>
+                </div>
+              </div>
+
+              <!-- Location -->
+              <div class="contact-row">
+                <div class="contact-icon-wrap">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/>
+                    <circle cx="12" cy="10" r="3"/>
+                  </svg>
+                </div>
+                <div class="contact-row-text">
+                  <div class="contact-row-label">Location</div>
+                  <div class="contact-row-value">Manila, Philippines</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Social links card -->
+            <div class="ui-card social-links-card">
+              <div class="contact-row-label" style="margin-bottom: 14px;">Find me online</div>
+              <div class="social-links">
+                <a href="https://github.com/Redine1" target="_blank" rel="noopener noreferrer" class="btn-outline social-btn">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                  GitHub
+                </a>
+                <a href="https://www.facebook.com/redinekyle.elejorde.9" target="_blank" rel="noopener noreferrer" class="btn-outline social-btn">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                  </svg>
+                  Facebook
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ════════════════════════════════════════════════════════
+       FOOTER
+       ════════════════════════════════════════════════════════ -->
+  <footer>
+    <div class="footer-text-section">
+      <div>Designed &amp; built with <span class="heart-beat"></span> by Redine Kyle V. Elejorde.</div>
+      <div>Computer Engineering Student · Manila, Philippines</div>
+    </div>
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#tech-stack">Tech Stack</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
