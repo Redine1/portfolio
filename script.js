@@ -429,3 +429,284 @@ const FALLBACK_EMAIL     = 'kriyuchi13@gmail.com';
   `;
   document.head.appendChild(style);
 })();
+
+/* ----------------------------------------------------------------
+   9. PDF CV DOWNLOAD INTEGRATION
+   Handles click, visual feedback and triggers download of assets/pdfs/resume.pdf
+   ---------------------------------------------------------------- */
+(function initCvDownload() {
+  const cvBtn = document.getElementById('download-cv-btn');
+  if (!cvBtn) return;
+
+  cvBtn.addEventListener('click', function () {
+    const textEl = cvBtn.querySelector('.cv-btn-text');
+    const iconDl = cvBtn.querySelector('.cv-icon-download');
+    const iconCk = cvBtn.querySelector('.cv-icon-check');
+
+    if (!textEl) return;
+
+    // Phase 1: Downloading feedback
+    textEl.textContent = 'Downloading...';
+    cvBtn.classList.add('downloading');
+
+    setTimeout(function () {
+      // Phase 2: Downloaded feedback
+      textEl.textContent = 'Downloaded \u2713';
+      cvBtn.classList.remove('downloading');
+      cvBtn.classList.add('downloaded');
+      if (iconDl) iconDl.style.display = 'none';
+      if (iconCk) iconCk.style.display = 'inline-block';
+
+      setTimeout(function () {
+        // Phase 3: Reset
+        textEl.textContent = 'Download CV';
+        cvBtn.classList.remove('downloaded');
+        if (iconDl) iconDl.style.display = 'inline-block';
+        if (iconCk) iconCk.style.display = 'none';
+      }, 2500);
+    }, 700);
+  });
+})();
+
+/* ----------------------------------------------------------------
+   10. ENHANCED MULTI-COLOR TECH STACK INTERACTION
+   Synchronizes hover highlight state across:
+   - IDE JSON tokens (.tech-token[data-tech])
+   - Categorized badges (.tech-badge[data-tech])
+   - Project tag chips (.chip--tech[data-tech])
+   ---------------------------------------------------------------- */
+(function initTechStackHoverSync() {
+  var allTechEls = document.querySelectorAll('[data-tech]');
+  if (!allTechEls.length) return;
+
+  allTechEls.forEach(function (el) {
+    var techName = el.getAttribute('data-tech');
+    if (!techName) return;
+
+    el.addEventListener('mouseenter', function () {
+      document.querySelectorAll('[data-tech="' + techName + '"]')
+        .forEach(function (item) { item.classList.add('is-highlighted'); });
+    });
+
+    el.addEventListener('mouseleave', function () {
+      document.querySelectorAll('[data-tech="' + techName + '"]')
+        .forEach(function (item) { item.classList.remove('is-highlighted'); });
+    });
+  });
+
+  // Staggered entrance animation when Tech Stack section scrolls into view
+  var techSection = document.getElementById('tech-stack');
+  if (!techSection || !('IntersectionObserver' in window)) return;
+
+  var entranceObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+
+      var badges = techSection.querySelectorAll('.tech-badge');
+      badges.forEach(function (badge, idx) {
+        setTimeout(function () {
+          badge.classList.add('is-highlighted');
+          setTimeout(function () { badge.classList.remove('is-highlighted'); }, 480);
+        }, idx * 45);
+      });
+      entranceObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.2 });
+
+  entranceObserver.observe(techSection);
+})();
+
+
+
+/* ----------------------------------------------------------------
+   11. STARS & METEORITE CANVAS ANIMATION
+   - Dark mode : bright white/cyan stars + vivid glowing meteor streaks
+   - Light mode: very soft indigo/slate ghost stars + faint silver meteors
+   - Uses requestAnimationFrame (GPU composited) — zero layout/CLS impact
+   - Respects prefers-reduced-motion
+   ---------------------------------------------------------------- */
+(function initStarsCanvas() {
+  'use strict';
+
+  const canvas  = document.getElementById('stars-canvas');
+  if (!canvas) return;
+  const ctx     = canvas.getContext('2d');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── Theme-aware palette ─────────────────────────────────── */
+  function getTheme() {
+    return document.documentElement.getAttribute('data-theme') || 'dark';
+  }
+
+  function getPalette(theme) {
+    if (theme === 'light') {
+      return {
+        starColors   : ['rgba(99,102,241,', 'rgba(148,163,184,', 'rgba(79,70,229,', 'rgba(100,116,139,'],
+        starAlphaMax : 0.35,   // very subtle in light mode
+        meteorColor  : 'rgba(99,102,241,',
+        meteorAlpha  : 0.45,
+        meteorGlow   : 'rgba(99,102,241,0.12)',
+        meteorTailLen: 90,
+      };
+    }
+    return {
+      starColors   : ['rgba(255,255,255,', 'rgba(186,230,253,', 'rgba(167,243,208,', 'rgba(196,181,253,'],
+      starAlphaMax : 0.9,
+      meteorColor  : 'rgba(186,230,253,',
+      meteorAlpha  : 0.9,
+      meteorGlow   : 'rgba(186,230,253,0.25)',
+      meteorTailLen: 160,
+    };
+  }
+
+  /* ── Resize handler ──────────────────────────────────────── */
+  function resize() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize, { passive: true });
+
+  /* ── Star pool ───────────────────────────────────────────── */
+  const STAR_COUNT = Math.min(220, Math.floor(window.innerWidth * window.innerHeight / 5000));
+
+  function randBetween(a, b) { return a + Math.random() * (b - a); }
+
+  function makeStar() {
+    return {
+      x        : Math.random() * window.innerWidth,
+      y        : Math.random() * window.innerHeight,
+      r        : randBetween(0.3, 1.6),
+      alpha    : randBetween(0.15, 1.0),
+      alphaDir : Math.random() < 0.5 ? 1 : -1,
+      alphaSpd : randBetween(0.002, 0.007),
+      colorIdx : Math.floor(Math.random() * 4),
+    };
+  }
+
+  const stars = Array.from({ length: STAR_COUNT }, makeStar);
+
+  /* ── Meteor pool ─────────────────────────────────────────── */
+  const MAX_METEORS = 3;
+  const meteors     = [];
+
+  function spawnMeteor() {
+    // Start from a random point along the top or right edge
+    const fromTop  = Math.random() < 0.6;
+    const startX   = fromTop ? Math.random() * window.innerWidth : window.innerWidth + 20;
+    const startY   = fromTop ? -20 : Math.random() * (window.innerHeight * 0.5);
+    const angle    = randBetween(30, 55); // degrees downward
+    const rad      = (angle * Math.PI) / 180;
+    const speed    = randBetween(6, 14);
+
+    meteors.push({
+      x    : startX,
+      y    : startY,
+      vx   : -Math.cos(rad) * speed,
+      vy   :  Math.sin(rad) * speed,
+      len  : randBetween(80, 180),
+      alpha: randBetween(0.5, 1.0),
+      width: randBetween(1, 2.2),
+      life : 1.0,          // fades from 1 → 0
+      decay: randBetween(0.008, 0.018),
+    });
+  }
+
+  // Stagger initial meteor spawns
+  let meteorTimer = 0;
+  const METEOR_INTERVAL = reduced ? Infinity : randBetween(120, 280); // frames
+
+  /* ── Draw one frame ──────────────────────────────────────── */
+  function draw(timestamp) {
+    const theme   = getTheme();
+    const palette = getPalette(theme);
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // ── Stars ──
+    if (!reduced) {
+      for (const s of stars) {
+        // Twinkle
+        s.alpha += s.alphaSpd * s.alphaDir;
+        const cap = palette.starAlphaMax;
+        if (s.alpha >= cap) { s.alpha = cap; s.alphaDir = -1; }
+        if (s.alpha <= 0.05) { s.alpha = 0.05; s.alphaDir = 1; }
+
+        const col = palette.starColors[s.colorIdx];
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = col + s.alpha.toFixed(3) + ')';
+        ctx.fill();
+
+        // Tiny glow for bigger stars in dark mode
+        if (theme === 'dark' && s.r > 1.1) {
+          const grd = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r * 4);
+          grd.addColorStop(0, col + (s.alpha * 0.5).toFixed(3) + ')');
+          grd.addColorStop(1, col + '0)');
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r * 4, 0, Math.PI * 2);
+          ctx.fillStyle = grd;
+          ctx.fill();
+        }
+      }
+    } else {
+      // reduced-motion: static dots only
+      for (const s of stars) {
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = palette.starColors[s.colorIdx] + (palette.starAlphaMax * 0.6).toFixed(3) + ')';
+        ctx.fill();
+      }
+    }
+
+    // ── Meteors ──
+    if (!reduced) {
+      meteorTimer++;
+      if (meteorTimer >= METEOR_INTERVAL && meteors.length < MAX_METEORS) {
+        spawnMeteor();
+        meteorTimer = 0;
+      }
+
+      for (let i = meteors.length - 1; i >= 0; i--) {
+        const m   = meteors[i];
+        m.x      += m.vx;
+        m.y      += m.vy;
+        m.life   -= m.decay;
+
+        if (m.life <= 0 || m.x < -200 || m.y > canvas.height + 100) {
+          meteors.splice(i, 1);
+          continue;
+        }
+
+        const tailX = m.x - m.vx * (m.len / (Math.abs(m.vx) || 1));
+        const tailY = m.y - m.vy * (m.len / (Math.abs(m.vy) || 1));
+
+        // Head glow
+        const grd = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, 6);
+        grd.addColorStop(0, palette.meteorColor + (m.alpha * m.life).toFixed(3) + ')');
+        grd.addColorStop(1, palette.meteorGlow);
+        ctx.beginPath();
+        ctx.arc(m.x, m.y, 6, 0, Math.PI * 2);
+        ctx.fillStyle = grd;
+        ctx.fill();
+
+        // Streak / tail
+        const trailGrd = ctx.createLinearGradient(m.x, m.y, tailX, tailY);
+        trailGrd.addColorStop(0, palette.meteorColor + (m.alpha * m.life).toFixed(3) + ')');
+        trailGrd.addColorStop(1, palette.meteorColor + '0)');
+
+        ctx.beginPath();
+        ctx.moveTo(m.x, m.y);
+        ctx.lineTo(tailX, tailY);
+        ctx.strokeStyle = trailGrd;
+        ctx.lineWidth   = m.width * m.life;
+        ctx.lineCap     = 'round';
+        ctx.stroke();
+      }
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  requestAnimationFrame(draw);
+})();

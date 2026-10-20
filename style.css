@@ -168,7 +168,24 @@ html, body {
 }
 
 /* ----------------------------------------------------------------
-   4. PIXELATED CRT OVERLAY
+   4. STARS & METEORITE CANVAS
+   ---------------------------------------------------------------- */
+#stars-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0; /* below all content, above body bg */
+  display: block;
+  opacity: 1;
+  transition: opacity 600ms ease;
+  will-change: transform; /* GPU compositing hint */
+}
+
+/* ----------------------------------------------------------------
+   4b. PIXELATED CRT OVERLAY
    ---------------------------------------------------------------- */
 .pixelated-overlay {
   position: fixed;
@@ -375,6 +392,26 @@ nav {
 
 .btn-cv {
   --highlight-color: var(--cyan);
+  position: relative;
+  overflow: hidden;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-cv.downloading {
+  opacity: 0.85;
+  cursor: wait;
+}
+
+.btn-cv.downloaded {
+  --highlight-color: #22c55e;
+  border-color: #22c55e !important;
+  color: #22c55e !important;
+  box-shadow: 0 0 18px rgba(34, 197, 94, 0.45);
+}
+
+.btn-cv.downloaded:hover {
+  background: #22c55e !important;
+  color: #0f172a !important;
 }
 
 /* ----------------------------------------------------------------
@@ -661,21 +698,63 @@ h2 {
 }
 
 /* ----------------------------------------------------------------
-   12. CODE EDITOR TECH STACK WINDOW (.code-editor-card)
-   (Directly matching user screenshot design reference)
+   12. CODE EDITOR TECH STACK WINDOW & MULTI-COLOR DISPLAY
    ---------------------------------------------------------------- */
+
+.tech-section-header {
+  margin-bottom: 28px;
+}
+
+.tech-subtitle-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--green);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+/* Animated Cycling Gradient Border (GPU accelerated, 0 CLS) */
+@keyframes borderGradientCycle {
+  0% {
+    border-color: rgba(56, 189, 248, 0.6);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(56, 189, 248, 0.2);
+  }
+  20% {
+    border-color: rgba(168, 85, 247, 0.6);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(168, 85, 247, 0.2);
+  }
+  40% {
+    border-color: rgba(244, 63, 94, 0.6);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(244, 63, 94, 0.2);
+  }
+  60% {
+    border-color: rgba(245, 158, 11, 0.6);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(245, 158, 11, 0.2);
+  }
+  80% {
+    border-color: rgba(34, 197, 94, 0.6);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(34, 197, 94, 0.2);
+  }
+  100% {
+    border-color: rgba(56, 189, 248, 0.6);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(56, 189, 248, 0.2);
+  }
+}
+
 .code-editor-card {
   border: 2px solid var(--editor-border);
   border-radius: var(--radius-big);
   background: var(--editor-bg);
   overflow: hidden;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
-  transition: border-color 250ms ease, box-shadow 250ms ease;
+  animation: borderGradientCycle 12s linear infinite;
+  transition: transform 250ms ease, box-shadow 250ms ease;
+  will-change: border-color, box-shadow;
 }
 
 .code-editor-card:hover {
-  border-color: var(--card-hover-border);
-  box-shadow: 0 18px 45px var(--green-glow);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 35px var(--green-glow);
 }
 
 .code-editor-header {
@@ -766,7 +845,7 @@ h2 {
   font-weight: 400;
 }
 
-/* Syntax Highlighting matching screenshot */
+/* Syntax Highlighting */
 .tok-comment {
   color: var(--editor-comment);
   font-style: italic;
@@ -782,13 +861,277 @@ h2 {
   font-weight: 600;
 }
 
+/* Multi-color Category Keys */
+.tok-key--lang    { color: #60a5fa; }
+.tok-key--db      { color: #34d399; }
+.tok-key--mobile  { color: #a78bfa; }
+.tok-key--web     { color: #fb923c; }
+.tok-key--desktop { color: #f472b6; }
+.tok-key--iot     { color: #38bdf8; }
+.tok-key--ai      { color: #fbbf24; }
+
 .tok-punct {
   color: var(--editor-punct);
 }
 
 .tok-str {
-  color: var(--editor-str); /* Vibrant green string literals */
+  color: var(--editor-str);
   font-weight: 500;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   SIGNATURE BRAND COLOR DEFINITIONS (Tokens, Badges, Chips)
+   ════════════════════════════════════════════════════════════════ */
+[data-tech="java"] {
+  --tech-color: #ea580c;
+  --tech-glow: rgba(234, 88, 12, 0.35);
+  --tech-bg: rgba(234, 88, 12, 0.12);
+}
+[data-tech="python"] {
+  --tech-color: #38bdf8;
+  --tech-glow: rgba(56, 189, 248, 0.35);
+  --tech-bg: rgba(56, 189, 248, 0.12);
+}
+[data-tech="c"] {
+  --tech-color: #60a5fa;
+  --tech-glow: rgba(96, 165, 250, 0.35);
+  --tech-bg: rgba(96, 165, 250, 0.12);
+}
+[data-tech="cpp"] {
+  --tech-color: #3b82f6;
+  --tech-glow: rgba(59, 130, 246, 0.35);
+  --tech-bg: rgba(59, 130, 246, 0.12);
+}
+[data-tech="csharp"] {
+  --tech-color: #a855f7;
+  --tech-glow: rgba(168, 85, 247, 0.35);
+  --tech-bg: rgba(168, 85, 247, 0.12);
+}
+[data-tech="kotlin"] {
+  --tech-color: #c084fc;
+  --tech-glow: rgba(192, 132, 252, 0.35);
+  --tech-bg: rgba(192, 132, 252, 0.12);
+}
+[data-tech="javascript"] {
+  --tech-color: #facc15;
+  --tech-glow: rgba(250, 204, 21, 0.35);
+  --tech-bg: rgba(250, 204, 21, 0.12);
+}
+[data-tech="mysql"] {
+  --tech-color: #0284c7;
+  --tech-glow: rgba(2, 132, 199, 0.35);
+  --tech-bg: rgba(2, 132, 199, 0.12);
+}
+[data-tech="mongodb"] {
+  --tech-color: #10b981;
+  --tech-glow: rgba(16, 185, 129, 0.35);
+  --tech-bg: rgba(16, 185, 129, 0.12);
+}
+[data-tech="sqlite"] {
+  --tech-color: #38bdf8;
+  --tech-glow: rgba(56, 189, 248, 0.35);
+  --tech-bg: rgba(56, 189, 248, 0.12);
+}
+[data-tech="android"] {
+  --tech-color: #22c55e;
+  --tech-glow: rgba(34, 197, 94, 0.35);
+  --tech-bg: rgba(34, 197, 94, 0.12);
+}
+[data-tech="html5"] {
+  --tech-color: #f97316;
+  --tech-glow: rgba(249, 115, 22, 0.35);
+  --tech-bg: rgba(249, 115, 22, 0.12);
+}
+[data-tech="css3"] {
+  --tech-color: #3b82f6;
+  --tech-glow: rgba(59, 130, 246, 0.35);
+  --tech-bg: rgba(59, 130, 246, 0.12);
+}
+[data-tech="fastapi"] {
+  --tech-color: #14b8a6;
+  --tech-glow: rgba(20, 184, 166, 0.35);
+  --tech-bg: rgba(20, 184, 166, 0.12);
+}
+[data-tech="javaswing"] {
+  --tech-color: #f59e0b;
+  --tech-glow: rgba(245, 158, 11, 0.35);
+  --tech-bg: rgba(245, 158, 11, 0.12);
+}
+[data-tech="javafx"] {
+  --tech-color: #2563eb;
+  --tech-glow: rgba(37, 99, 235, 0.35);
+  --tech-bg: rgba(37, 99, 235, 0.12);
+}
+[data-tech="esp32"] {
+  --tech-color: #ef4444;
+  --tech-glow: rgba(239, 68, 68, 0.35);
+  --tech-bg: rgba(239, 68, 68, 0.12);
+}
+[data-tech="arduino"] {
+  --tech-color: #06b6d4;
+  --tech-glow: rgba(6, 182, 212, 0.35);
+  --tech-bg: rgba(6, 182, 212, 0.12);
+}
+[data-tech="circuit"] {
+  --tech-color: #fbbf24;
+  --tech-glow: rgba(251, 191, 36, 0.35);
+  --tech-bg: rgba(251, 191, 36, 0.12);
+}
+[data-tech="iot"] {
+  --tech-color: #06b6d4;
+  --tech-glow: rgba(6, 182, 212, 0.35);
+  --tech-bg: rgba(6, 182, 212, 0.12);
+}
+[data-tech="solar"] {
+  --tech-color: #eab308;
+  --tech-glow: rgba(234, 179, 8, 0.35);
+  --tech-bg: rgba(234, 179, 8, 0.12);
+}
+[data-tech="chatgpt"] {
+  --tech-color: #10a37f;
+  --tech-glow: rgba(16, 163, 127, 0.35);
+  --tech-bg: rgba(16, 163, 127, 0.12);
+}
+[data-tech="claude"] {
+  --tech-color: #d97706;
+  --tech-glow: rgba(217, 119, 6, 0.35);
+  --tech-bg: rgba(217, 119, 6, 0.12);
+}
+[data-tech="gemini"] {
+  --tech-color: #8b5cf6;
+  --tech-glow: rgba(139, 92, 246, 0.35);
+  --tech-bg: rgba(139, 92, 246, 0.12);
+}
+
+/* Interactive Multi-Color Syntax Tokens */
+.tech-token {
+  color: var(--tech-color, var(--editor-str));
+  display: inline-block;
+  padding: 1px 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 180ms cubic-bezier(0.4, 0, 0.2, 1),
+              background 180ms ease,
+              box-shadow 180ms ease,
+              text-shadow 180ms ease;
+  user-select: text;
+}
+
+.tech-token:hover,
+.tech-token.is-highlighted {
+  transform: translateY(-1px) scale(1.05);
+  background: var(--tech-bg);
+  box-shadow: 0 0 12px var(--tech-glow);
+  text-shadow: 0 0 8px currentColor;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   CATEGORIZED INTERACTIVE TECH BADGES GRID
+   ════════════════════════════════════════════════════════════════ */
+.tech-badges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 20px;
+  margin-top: 36px;
+}
+
+.tech-category-card {
+  padding: 20px 22px;
+  transition: border-color 250ms ease, box-shadow 250ms ease, transform 250ms ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.tech-category-card:hover {
+  border-color: var(--card-hover-border);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+  transform: translateY(-2px);
+}
+
+.tech-category-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-heading);
+  margin-bottom: 14px;
+}
+
+.category-icon-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.tech-badges-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+/* Tech Badge Pill */
+.tech-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: inherit;
+  background: var(--tech-bg, rgba(255, 255, 255, 0.04));
+  color: var(--tech-color, var(--text-color));
+  border: 1px solid var(--tech-color, var(--card-border));
+  transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 200ms ease,
+              background 200ms ease,
+              border-color 200ms ease,
+              color 200ms ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+.tech-badge .badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--tech-color, currentColor);
+  box-shadow: 0 0 6px var(--tech-color, currentColor);
+  transition: transform 200ms ease;
+  flex-shrink: 0;
+}
+
+.tech-badge:hover,
+.tech-badge.is-highlighted {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 16px var(--tech-glow), 0 0 12px var(--tech-color);
+  background: var(--tech-bg);
+  border-color: var(--tech-color);
+  color: #ffffff;
+}
+
+.tech-badge:hover .badge-dot,
+.tech-badge.is-highlighted .badge-dot {
+  transform: scale(1.5);
+}
+
+/* Synchronized Chips in Featured Projects */
+.chip--tech {
+  transition: all 200ms ease;
+  cursor: pointer;
+}
+
+.chip--tech:hover,
+.chip--tech.is-highlighted {
+  border-color: var(--tech-color) !important;
+  color: var(--tech-color) !important;
+  box-shadow: 0 0 12px var(--tech-glow);
+  transform: translateY(-1px) scale(1.05);
 }
 
 /* ----------------------------------------------------------------

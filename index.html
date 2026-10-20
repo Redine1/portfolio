@@ -18,6 +18,11 @@
 <body>
 
   <!-- ════════════════════════════════════════════════════════
+       STARS & METEORITE CANVAS (Fixed background layer)
+       ════════════════════════════════════════════════════════ -->
+  <canvas id="stars-canvas" aria-hidden="true"></canvas>
+
+  <!-- ════════════════════════════════════════════════════════
        PIXELATED CRT OVERLAY
        ════════════════════════════════════════════════════════ -->
   <div class="pixelated-overlay" aria-hidden="true"></div>
@@ -117,14 +122,14 @@
 
           <h1>
             <div class="h1-main">
-              <div class="hey-there">Hey there, I'm</div>
+              <div class="hey-there">Hello</div>
               <div class="name">Redine Kyle V. Elejorde</div>
             </div>
             <div class="h1-sub">Computer Engineering Student.</div>
           </h1>
 
           <p class="hero-bio">
-            Computer Engineering student passionate about <strong>embedded systems</strong>,
+            Computer Engineering student passionate about <strong>building apps</strong>,
             <strong>mobile &amp; desktop software development</strong>,
             <strong>database architecture</strong>, and
             <strong>smart tech integrations</strong>.
@@ -166,14 +171,25 @@
               <span>Email</span>
             </button>
 
-            <!-- Download CV -->
-            <a href="resume.pdf" download="Redine_Kyle_Elejorde_CV.pdf" class="btn-outline btn-cv">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <!-- Download CV (Connected to assets/pdfs/resume.pdf) -->
+            <a
+              href="assets/pdfs/resume.pdf"
+              download="Redine_Kyle_Elejorde_CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-outline btn-cv"
+              id="download-cv-btn"
+              title="Download Redine Kyle Elejorde CV (PDF)"
+            >
+              <svg class="cv-icon-download" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                 <polyline points="7 10 12 15 17 10"/>
                 <line x1="12" y1="15" x2="12" y2="3"/>
               </svg>
-              <span>Download CV</span>
+              <svg class="cv-icon-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              <span class="cv-btn-text">Download CV</span>
             </a>
           </div>
         </section>
@@ -202,19 +218,12 @@
               </p>
             </div>
             <div class="used-technologies">
-              <div class="chip chip--slate">ESP32</div>
-              <div class="chip chip--slate">Arduino</div>
-              <div class="chip chip--slate">C++</div>
-              <div class="chip chip--slate">IoT</div>
-              <div class="chip chip--slate">Solar Energy</div>
+              <div class="chip chip--slate chip--tech" data-tech="esp32">ESP32</div>
+              <div class="chip chip--slate chip--tech" data-tech="arduino">Arduino</div>
+              <div class="chip chip--slate chip--tech" data-tech="cpp">C++</div>
+              <div class="chip chip--slate chip--tech" data-tech="iot">IoT</div>
+              <div class="chip chip--slate chip--tech" data-tech="solar">Solar Energy</div>
             </div>
-            <div class="card-separator"></div>
-            <a href="https://github.com/Redine1" target="_blank" rel="noopener noreferrer" class="btn-outline project-source-btn">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
-              </svg>
-              <span>View on GitHub</span>
-            </a>
           </article>
 
           <!-- Project 2 -->
@@ -229,18 +238,11 @@
               </p>
             </div>
             <div class="used-technologies">
-              <div class="chip chip--slate">Python</div>
-              <div class="chip chip--slate">FastAPI</div>
-              <div class="chip chip--slate">Kotlin</div>
-              <div class="chip chip--slate">Android Studio</div>
+              <div class="chip chip--slate chip--tech" data-tech="python">Python</div>
+              <div class="chip chip--slate chip--tech" data-tech="fastapi">FastAPI</div>
+              <div class="chip chip--slate chip--tech" data-tech="kotlin">Kotlin</div>
+              <div class="chip chip--slate chip--tech" data-tech="android">Android Studio</div>
             </div>
-            <div class="card-separator"></div>
-            <a href="https://github.com/Redine1" target="_blank" rel="noopener noreferrer" class="btn-outline project-source-btn">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
-              </svg>
-              <span>View on GitHub</span>
-            </a>
           </article>
 
           <!-- Project 3 -->
@@ -255,17 +257,10 @@
               </p>
             </div>
             <div class="used-technologies">
-              <div class="chip chip--slate">Java</div>
-              <div class="chip chip--slate">JavaSwing</div>
-              <div class="chip chip--slate">MySQL</div>
+              <div class="chip chip--slate chip--tech" data-tech="java">Java</div>
+              <div class="chip chip--slate chip--tech" data-tech="javaswing">JavaSwing</div>
+              <div class="chip chip--slate chip--tech" data-tech="mysql">MySQL</div>
             </div>
-            <div class="card-separator"></div>
-            <a href="https://github.com/Redine1" target="_blank" rel="noopener noreferrer" class="btn-outline project-source-btn">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
-              </svg>
-              <span>View on GitHub</span>
-            </a>
           </article>
 
           <!-- Project 4 -->
@@ -280,17 +275,10 @@
               </p>
             </div>
             <div class="used-technologies">
-              <div class="chip chip--slate">ESP32</div>
-              <div class="chip chip--slate">Circuit Design</div>
-              <div class="chip chip--slate">C++</div>
+              <div class="chip chip--slate chip--tech" data-tech="esp32">ESP32</div>
+              <div class="chip chip--slate chip--tech" data-tech="circuit">Circuit Design</div>
+              <div class="chip chip--slate chip--tech" data-tech="cpp">C++</div>
             </div>
-            <div class="card-separator"></div>
-            <a href="https://github.com/Redine1" target="_blank" rel="noopener noreferrer" class="btn-outline project-source-btn">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
-              </svg>
-              <span>View on GitHub</span>
-            </a>
           </article>
 
         </div>
@@ -302,9 +290,12 @@
          ══════════════════════════════════════════════════════ -->
     <section class="section-wrapper" id="tech-stack">
       <div class="section-container">
-        <h2>Tech Stack &amp; Tools</h2>
+        <div class="tech-section-header">
+          <div class="tech-subtitle-label">DEVELOPER TOOLBELT</div>
+          <h2>Tech Stack &amp; Tools</h2>
+        </div>
 
-        <!-- IDE Code Editor Window (matches user design reference) -->
+        <!-- IDE Code Editor Window (matches user design reference with vibrant syntax tokens) -->
         <div class="code-editor-card">
           <!-- Window Title Bar -->
           <div class="code-editor-header">
@@ -329,20 +320,120 @@
             </button>
           </div>
 
-          <!-- Editor Body with Line Numbers & Syntax Highlighting -->
+          <!-- Editor Body with Line Numbers & Vibrant Syntax Highlighting -->
           <div class="code-editor-body">
             <pre class="code-block" tabindex="0"><code><span class="code-line"><span class="line-num">1</span>  <span class="tok-comment">// core technologies &amp; toolbelt</span></span>
 <span class="code-line"><span class="line-num">2</span>  <span class="tok-bracket">{</span></span>
-<span class="code-line"><span class="line-num">3</span>    <span class="tok-key">"languages"</span><span class="tok-punct">:</span> <span class="tok-bracket">[</span> <span class="tok-str">"Java"</span><span class="tok-punct">,</span> <span class="tok-str">"Python"</span><span class="tok-punct">,</span> <span class="tok-str">"C"</span><span class="tok-punct">,</span> <span class="tok-str">"C++"</span><span class="tok-punct">,</span> <span class="tok-str">"C#"</span><span class="tok-punct">,</span> <span class="tok-str">"Kotlin"</span><span class="tok-punct">,</span> <span class="tok-str">"JavaScript"</span> <span class="tok-bracket">]</span><span class="tok-punct">,</span></span>
-<span class="code-line"><span class="line-num">4</span>    <span class="tok-key">"databases"</span><span class="tok-punct">:</span> <span class="tok-bracket">[</span> <span class="tok-str">"MySQL"</span><span class="tok-punct">,</span> <span class="tok-str">"MongoDB"</span><span class="tok-punct">,</span> <span class="tok-str">"SQLite"</span> <span class="tok-bracket">]</span><span class="tok-punct">,</span></span>
-<span class="code-line"><span class="line-num">5</span>    <span class="tok-key">"mobile"</span><span class="tok-punct">:</span> <span class="tok-bracket">[</span> <span class="tok-str">"Kotlin"</span><span class="tok-punct">,</span> <span class="tok-str">"Android Studio"</span> <span class="tok-bracket">]</span><span class="tok-punct">,</span></span>
-<span class="code-line"><span class="line-num">6</span>    <span class="tok-key">"web_backend"</span><span class="tok-punct">:</span> <span class="tok-bracket">[</span> <span class="tok-str">"HTML5"</span><span class="tok-punct">,</span> <span class="tok-str">"CSS3"</span><span class="tok-punct">,</span> <span class="tok-str">"JavaScript"</span><span class="tok-punct">,</span> <span class="tok-str">"FastAPI"</span> <span class="tok-bracket">]</span><span class="tok-punct">,</span></span>
-<span class="code-line"><span class="line-num">7</span>    <span class="tok-key">"desktop_gui"</span><span class="tok-punct">:</span> <span class="tok-bracket">[</span> <span class="tok-str">"JavaSwing"</span><span class="tok-punct">,</span> <span class="tok-str">"JavaFX"</span> <span class="tok-bracket">]</span><span class="tok-punct">,</span></span>
-<span class="code-line"><span class="line-num">8</span>    <span class="tok-key">"embedded_iot"</span><span class="tok-punct">:</span> <span class="tok-bracket">[</span> <span class="tok-str">"ESP32"</span><span class="tok-punct">,</span> <span class="tok-str">"Arduino"</span><span class="tok-punct">,</span> <span class="tok-str">"Circuit Design"</span><span class="tok-punct">,</span> <span class="tok-str">"IoT"</span> <span class="tok-bracket">]</span><span class="tok-punct">,</span></span>
-<span class="code-line"><span class="line-num">9</span>    <span class="tok-key">"ai_tools"</span><span class="tok-punct">:</span> <span class="tok-bracket">[</span> <span class="tok-str">"ChatGPT"</span><span class="tok-punct">,</span> <span class="tok-str">"Claude"</span><span class="tok-punct">,</span> <span class="tok-str">"Gemini"</span> <span class="tok-bracket">]</span></span>
+<span class="code-line"><span class="line-num">3</span>    <span class="tok-key tok-key--lang">"languages"</span><span class="tok-punct">:</span> <span class="tok-bracket">[</span> <span class="tok-str tech-token" data-tech="java">"Java"</span><span class="tok-punct">,</span> <span class="tok-str tech-token" data-tech="python">"Python"</span><span class="tok-punct">,</span> <span class="tok-str tech-token" data-tech="c">"C"</span><span class="tok-punct">,</span> <span class="tok-str tech-token" data-tech="cpp">"C++"</span><span class="tok-punct">,</span> <span class="tok-str tech-token" data-tech="csharp">"C#"</span><span class="tok-punct">,</span> <span class="tok-str tech-token" data-tech="kotlin">"Kotlin"</span><span class="tok-punct">,</span> <span class="tok-str tech-token" data-tech="javascript">"JavaScript"</span> <span class="tok-bracket">]</span><span class="tok-punct">,</span></span>
+<span class="code-line"><span class="line-num">4</span>    <span class="tok-key tok-key--db">"databases"</span><span class="tok-punct">:</span> <span class="tok-bracket">[</span> <span class="tok-str tech-token" data-tech="mysql">"MySQL"</span><span class="tok-punct">,</span> <span class="tok-str tech-token" data-tech="mongodb">"MongoDB"</span><span class="tok-punct">,</span> <span class="tok-str tech-token" data-tech="sqlite">"SQLite"</span> <span class="tok-bracket">]</span><span class="tok-punct">,</span></span>
+<span class="code-line"><span class="line-num">5</span>    <span class="tok-key tok-key--mobile">"mobile"</span><span class="tok-punct">:</span> <span class="tok-bracket">[</span> <span class="tok-str tech-token" data-tech="kotlin">"Kotlin"</span><span class="tok-punct">,</span> <span class="tok-str tech-token" data-tech="android">"Android Studio"</span> <span class="tok-bracket">]</span><span class="tok-punct">,</span></span>
+<span class="code-line"><span class="line-num">6</span>    <span class="tok-key tok-key--web">"web_backend"</span><span class="tok-punct">:</span> <span class="tok-bracket">[</span> <span class="tok-str tech-token" data-tech="html5">"HTML5"</span><span class="tok-punct">,</span> <span class="tok-str tech-token" data-tech="css3">"CSS3"</span><span class="tok-punct">,</span> <span class="tok-str tech-token" data-tech="javascript">"JavaScript"</span><span class="tok-punct">,</span> <span class="tok-str tech-token" data-tech="fastapi">"FastAPI"</span> <span class="tok-bracket">]</span><span class="tok-punct">,</span></span>
+<span class="code-line"><span class="line-num">7</span>    <span class="tok-key tok-key--desktop">"desktop_gui"</span><span class="tok-punct">:</span> <span class="tok-bracket">[</span> <span class="tok-str tech-token" data-tech="javaswing">"JavaSwing"</span><span class="tok-punct">,</span> <span class="tok-str tech-token" data-tech="javafx">"JavaFX"</span> <span class="tok-bracket">]</span><span class="tok-punct">,</span></span>
+<span class="code-line"><span class="line-num">8</span>    <span class="tok-key tok-key--iot">"embedded_iot"</span><span class="tok-punct">:</span> <span class="tok-bracket">[</span> <span class="tok-str tech-token" data-tech="esp32">"ESP32"</span><span class="tok-punct">,</span> <span class="tok-str tech-token" data-tech="arduino">"Arduino"</span><span class="tok-punct">,</span> <span class="tok-str tech-token" data-tech="circuit">"Circuit Design"</span><span class="tok-punct">,</span> <span class="tok-str tech-token" data-tech="iot">"IoT"</span> <span class="tok-bracket">]</span><span class="tok-punct">,</span></span>
+<span class="code-line"><span class="line-num">9</span>    <span class="tok-key tok-key--ai">"ai_tools"</span><span class="tok-punct">:</span> <span class="tok-bracket">[</span> <span class="tok-str tech-token" data-tech="chatgpt">"ChatGPT"</span><span class="tok-punct">,</span> <span class="tok-str tech-token" data-tech="claude">"Claude"</span><span class="tok-punct">,</span> <span class="tok-str tech-token" data-tech="gemini">"Gemini"</span> <span class="tok-bracket">]</span></span>
 <span class="code-line"><span class="line-num">10</span> <span class="tok-bracket">}</span></span>
 <span class="code-line"><span class="line-num">11</span> </span></code></pre>
           </div>
+        </div>
+
+        <!-- Categorized Interactive Brand Badges Showcase -->
+        <div class="tech-badges-grid" aria-label="Categorized Technology Stack">
+
+          <!-- Category 1: Languages -->
+          <div class="ui-card tech-category-card">
+            <div class="tech-category-header">
+              <span class="category-icon-dot" style="background: #60a5fa; box-shadow: 0 0 8px #60a5fa;"></span>
+              <span>Programming Languages</span>
+            </div>
+            <div class="tech-badges-list">
+              <span class="tech-badge" data-tech="java"><span class="badge-dot"></span>Java</span>
+              <span class="tech-badge" data-tech="python"><span class="badge-dot"></span>Python</span>
+              <span class="tech-badge" data-tech="c"><span class="badge-dot"></span>C</span>
+              <span class="tech-badge" data-tech="cpp"><span class="badge-dot"></span>C++</span>
+              <span class="tech-badge" data-tech="csharp"><span class="badge-dot"></span>C#</span>
+              <span class="tech-badge" data-tech="kotlin"><span class="badge-dot"></span>Kotlin</span>
+              <span class="tech-badge" data-tech="javascript"><span class="badge-dot"></span>JavaScript</span>
+            </div>
+          </div>
+
+          <!-- Category 2: Databases -->
+          <div class="ui-card tech-category-card">
+            <div class="tech-category-header">
+              <span class="category-icon-dot" style="background: #34d399; box-shadow: 0 0 8px #34d399;"></span>
+              <span>Database Management</span>
+            </div>
+            <div class="tech-badges-list">
+              <span class="tech-badge" data-tech="mysql"><span class="badge-dot"></span>MySQL</span>
+              <span class="tech-badge" data-tech="mongodb"><span class="badge-dot"></span>MongoDB</span>
+              <span class="tech-badge" data-tech="sqlite"><span class="badge-dot"></span>SQLite</span>
+            </div>
+          </div>
+
+          <!-- Category 3: Mobile -->
+          <div class="ui-card tech-category-card">
+            <div class="tech-category-header">
+              <span class="category-icon-dot" style="background: #a78bfa; box-shadow: 0 0 8px #a78bfa;"></span>
+              <span>Mobile Development</span>
+            </div>
+            <div class="tech-badges-list">
+              <span class="tech-badge" data-tech="kotlin"><span class="badge-dot"></span>Kotlin</span>
+              <span class="tech-badge" data-tech="android"><span class="badge-dot"></span>Android Studio</span>
+            </div>
+          </div>
+
+          <!-- Category 4: Web & Backend -->
+          <div class="ui-card tech-category-card">
+            <div class="tech-category-header">
+              <span class="category-icon-dot" style="background: #fb923c; box-shadow: 0 0 8px #fb923c;"></span>
+              <span>Web &amp; Backend</span>
+            </div>
+            <div class="tech-badges-list">
+              <span class="tech-badge" data-tech="html5"><span class="badge-dot"></span>HTML5</span>
+              <span class="tech-badge" data-tech="css3"><span class="badge-dot"></span>CSS3</span>
+              <span class="tech-badge" data-tech="javascript"><span class="badge-dot"></span>JavaScript</span>
+              <span class="tech-badge" data-tech="fastapi"><span class="badge-dot"></span>FastAPI</span>
+            </div>
+          </div>
+
+          <!-- Category 5: Desktop GUI -->
+          <div class="ui-card tech-category-card">
+            <div class="tech-category-header">
+              <span class="category-icon-dot" style="background: #f472b6; box-shadow: 0 0 8px #f472b6;"></span>
+              <span>Desktop Applications</span>
+            </div>
+            <div class="tech-badges-list">
+              <span class="tech-badge" data-tech="javaswing"><span class="badge-dot"></span>JavaSwing</span>
+              <span class="tech-badge" data-tech="javafx"><span class="badge-dot"></span>JavaFX</span>
+            </div>
+          </div>
+
+          <!-- Category 6: Embedded Systems & IoT -->
+          <div class="ui-card tech-category-card">
+            <div class="tech-category-header">
+              <span class="category-icon-dot" style="background: #38bdf8; box-shadow: 0 0 8px #38bdf8;"></span>
+              <span>Embedded Systems &amp; IoT</span>
+            </div>
+            <div class="tech-badges-list">
+              <span class="tech-badge" data-tech="esp32"><span class="badge-dot"></span>ESP32</span>
+              <span class="tech-badge" data-tech="arduino"><span class="badge-dot"></span>Arduino</span>
+              <span class="tech-badge" data-tech="circuit"><span class="badge-dot"></span>Circuit Design</span>
+              <span class="tech-badge" data-tech="iot"><span class="badge-dot"></span>IoT Architecture</span>
+            </div>
+          </div>
+
+          <!-- Category 7: AI Tools -->
+          <div class="ui-card tech-category-card">
+            <div class="tech-category-header">
+              <span class="category-icon-dot" style="background: #fbbf24; box-shadow: 0 0 8px #fbbf24;"></span>
+              <span>AI Tools &amp; Accelerators</span>
+            </div>
+            <div class="tech-badges-list">
+              <span class="tech-badge" data-tech="chatgpt"><span class="badge-dot"></span>ChatGPT</span>
+              <span class="tech-badge" data-tech="claude"><span class="badge-dot"></span>Claude</span>
+              <span class="tech-badge" data-tech="gemini"><span class="badge-dot"></span>Gemini</span>
+            </div>
+          </div>
+
         </div>
 
       </div>
